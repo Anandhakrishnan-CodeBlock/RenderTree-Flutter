@@ -1,0 +1,1 @@
+enum LastWatchedState { save, forgot }

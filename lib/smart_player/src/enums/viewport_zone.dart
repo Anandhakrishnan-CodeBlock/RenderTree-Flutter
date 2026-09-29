@@ -1,0 +1,1 @@
+enum ViewportZone { top, mid, bottom }

@@ -1,0 +1,1 @@
+enum ShimmerDirection { ltr, rtl, ttb, btt }

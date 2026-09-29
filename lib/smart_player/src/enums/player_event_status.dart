@@ -1,0 +1,1 @@
+enum PlayerEventStatus { loading, ready, failed  }
