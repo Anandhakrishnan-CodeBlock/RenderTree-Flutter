@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../../smart_player.dart';
+import '../../smart_import.dart';
 
 abstract mixin class VideoControls {
 

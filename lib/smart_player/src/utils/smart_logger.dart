@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:renter_tree_test/smart_player/smart_player.dart';
+import 'package:renter_tree_test/smart_player/smart_import.dart';
 
 class SmartLogger {
   // Private constructor to prevent instantiation

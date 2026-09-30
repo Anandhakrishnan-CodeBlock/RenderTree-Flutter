@@ -1,38 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
-import 'smart_player.dart';
+import 'package:renter_tree_test/smart_player/src/widgets/smart_video_player_list_widget.dart';
+import 'smart_import.dart';
 
-class SmartVideoPlayer extends StatelessWidget {
+class SmartListPlayer extends StatelessWidget {
   final String videoUrl;
   final String debugLabelText;
-  final String? thumbnailUrl;
+  final String thumbnailUrl;
   final double height;
   final double width;
   final PlayMode playMode;
   final LastWatchedState lastWatchedStatus;
   final bool? isAsset;
   final bool looping;
-  final PlayerVariant variant;
   final Color seekBarColor;
+  final VoidCallback onClickListItem;
 
-  const SmartVideoPlayer({
+  const SmartListPlayer({
     required Key key,
     required this.videoUrl,
     required this.debugLabelText,
-    this.thumbnailUrl,
+    required this.thumbnailUrl,
     required this.height,
     required this.width,
     this.playMode = PlayMode.auto,
     this.lastWatchedStatus = LastWatchedState.forgot,
     this.looping = false,
     this.isAsset,
-    required this.variant,
     this.seekBarColor = Colors.redAccent,
+    required this.onClickListItem
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SmartVideoPlayerWidget(
+    return SmartVideoPlayerListWidget(
       key: key!,
       videoUrl: videoUrl,
       debugLabelText: debugLabelText,
@@ -40,11 +40,10 @@ class SmartVideoPlayer extends StatelessWidget {
       height: height,
       width: width,
       lastWatchedStatus: lastWatchedStatus,
-      playMode: playMode,
       isAsset: isAsset,
       looping: looping,
-      variant: variant,
       seekBarColor: seekBarColor,
+      onClickListItem: onClickListItem,
     );
   }
 }

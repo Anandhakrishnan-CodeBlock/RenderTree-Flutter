@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import '../../smart_player.dart';
+import '../../smart_import.dart';
 
 class SmartVideoInfo {
   final Key key;

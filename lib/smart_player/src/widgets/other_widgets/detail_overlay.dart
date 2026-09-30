@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../../smart_player.dart';
+import '../../../smart_import.dart';
 
 class DetailOverlay extends StatelessWidget {
   final VideoPlayerController videoController;

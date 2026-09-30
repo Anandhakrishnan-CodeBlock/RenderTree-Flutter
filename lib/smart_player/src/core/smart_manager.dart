@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../smart_player.dart';
+import '../../smart_import.dart';
 
 class SmartManager extends NavigationControls{
   SmartManager._internal();
@@ -14,8 +14,7 @@ class SmartManager extends NavigationControls{
     return _instance;
   }
 
-  final StreamController<PlayerEvent> _selectedVideo =
-      StreamController<PlayerEvent>.broadcast();
+  final StreamController<PlayerEvent> _selectedVideo = StreamController<PlayerEvent>.broadcast();
 
   Stream<PlayerEvent> get selectedVideo => _selectedVideo.stream;
 
@@ -35,18 +34,18 @@ class SmartManager extends NavigationControls{
     _selectedVideo.add(PlayerEvent.failed(key: key, error: error));
   }
 
-  final smartStack = SmartStack();
-  final InfoControls infoControls = InfoController();
-  final ListControls listControls = ListController();
+  final _smartStack = SmartStack();
+  final InfoControls _infoControls = InfoController();
+  final ListControls _listControls = ListController();
 
-  Key? get selectedKey => infoControls.selectedKey;
+  Key? get selectedKey => _infoControls.selectedKey;
 
   void onInit({required SmartVideoInfo info, required Key key}) {
-    infoControls.addInfo(info: info, key: key);
+    _infoControls.addInfo(info: info, key: key);
   }
 
   void startDrawing({required Key key}) {
-    infoControls.setInfo(
+    _infoControls.setInfo(
       key: key,
       onLoading: ({required Key key}) {
         loadingEvent(key: key);
@@ -65,12 +64,12 @@ class SmartManager extends NavigationControls{
     required double score,
     Duration? duration,
   }) {
-    listControls.reportVisibility(
+    _listControls.reportVisibility(
         key: key,
         score: score,
         duration: duration,
         evaluateFocusWinner: () {
-          listControls.evaluateFocusWinner(
+          _listControls.evaluateFocusWinner(
               selectedKey: selectedKey,
               onWinner: ({required Key key}) {
                 startDrawing(key: key);
@@ -81,11 +80,11 @@ class SmartManager extends NavigationControls{
   }
 
   void onDispose({required Key key}) {
-    infoControls.clearInfo(key: key);
-    listControls.clearVisibility(
+    _infoControls.clearInfo(key: key);
+    _listControls.clearVisibility(
         key: key,
         evaluateFocusWinner: () {
-          listControls.evaluateFocusWinner(
+          _listControls.evaluateFocusWinner(
               selectedKey: selectedKey,
               onWinner: ({required Key key}) {
                 startDrawing(key: key);
@@ -97,28 +96,28 @@ class SmartManager extends NavigationControls{
 
   @override
   void didPop() {
-    infoControls.clearAll();
-    listControls.clearList();
-    Map<Key, SmartVideoInfo> videos = smartStack.top();
+    _infoControls.clearAll();
+    _listControls.clearList();
+    Map<Key, SmartVideoInfo> videos = _smartStack.top();
     if (videos.isNotEmpty) {
-      infoControls.setVideos = videos;
-      infoControls.playLastWatchedVideo(startDrawing: (key){
+      _infoControls.setVideos = videos;
+      _infoControls.playLastWatchedVideo(startDrawing: (key){
         startDrawing(key: key);
       });
     } else {
-      infoControls.stopVideo();
+      _infoControls.stopVideo();
     }
   }
 
   @override
   void didPush() {
-    Map<Key, SmartVideoInfo> videos = infoControls.videos;
+    Map<Key, SmartVideoInfo> videos = _infoControls.videos;
     if (videos.isNotEmpty) {
-      infoControls.saveLastWatchedVideo();
-      infoControls.stopVideo();
-      smartStack.push(videos);
-      infoControls.clearAll();
-      listControls.clearList();
+      _infoControls.saveLastWatchedVideo();
+      _infoControls.stopVideo();
+      _smartStack.push(videos);
+      _infoControls.clearAll();
+      _listControls.clearList();
     }
   }
 }

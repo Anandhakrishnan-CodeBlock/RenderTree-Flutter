@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../smart_player/smart_player.dart';
+import '../../smart_player/smart_import.dart';
 
 class ViewScreen extends StatefulWidget {
   final String videoUrl;
@@ -27,7 +27,7 @@ class ViewScreenState extends State<ViewScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SmartVideoPlayer(
+          SmartPlayer(
             key: widget.valueKey,
             videoUrl: widget.videoUrl,
             debugLabelText: widget.debugLabelText,
@@ -37,8 +37,7 @@ class ViewScreenState extends State<ViewScreen> {
             lastWatchedStatus: LastWatchedState.save,
             isAsset: false,
             looping: true,
-            height: 250,
-            variant: PlayerVariant.list,
+            height: 250
           ),
         ],
       ),

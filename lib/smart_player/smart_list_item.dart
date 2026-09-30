@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import '../smart_player/smart_player.dart';
+import '../smart_player/smart_import.dart';
 
 class SmartListItem extends StatelessWidget {
   final Key itemKey;

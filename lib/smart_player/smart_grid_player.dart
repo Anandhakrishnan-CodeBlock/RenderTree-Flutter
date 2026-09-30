@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:renter_tree_test/smart_player/src/widgets/smart_video_player_grid_widget.dart';
 import 'smart_import.dart';
 
-class SmartPlayer extends StatelessWidget {
+class SmartGridPlayer extends StatelessWidget {
   final String videoUrl;
   final String debugLabelText;
-  final String? thumbnailUrl;
+  final String thumbnailUrl;
   final double height;
   final double width;
   final PlayMode playMode;
@@ -12,12 +13,13 @@ class SmartPlayer extends StatelessWidget {
   final bool? isAsset;
   final bool looping;
   final Color seekBarColor;
+  final VoidCallback onClickGridItem;
 
-  const SmartPlayer({
+  const SmartGridPlayer({
     required Key key,
     required this.videoUrl,
     required this.debugLabelText,
-    this.thumbnailUrl,
+    required this.thumbnailUrl,
     required this.height,
     required this.width,
     this.playMode = PlayMode.auto,
@@ -25,11 +27,12 @@ class SmartPlayer extends StatelessWidget {
     this.looping = false,
     this.isAsset,
     this.seekBarColor = Colors.redAccent,
+    required this.onClickGridItem,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SmartVideoPlayerWidget(
+    return SmartVideoPlayerGridWidget(
       key: key!,
       videoUrl: videoUrl,
       debugLabelText: debugLabelText,
@@ -37,10 +40,10 @@ class SmartPlayer extends StatelessWidget {
       height: height,
       width: width,
       lastWatchedStatus: lastWatchedStatus,
-      playMode: playMode,
       isAsset: isAsset,
       looping: looping,
       seekBarColor: seekBarColor,
+      onClickGridItem: onClickGridItem,
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
-import '../../smart_player.dart';
+import '../../smart_import.dart';
 
 class SmartListItemWidget extends StatefulWidget {
   final Key itemKey;

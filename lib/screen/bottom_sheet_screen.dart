@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:renter_tree_test/constants/video_url.dart';
-import 'package:renter_tree_test/smart_player/smart_video_player.dart';
+import 'package:renter_tree_test/smart_player/smart_player.dart';
 import 'package:renter_tree_test/smart_player/src/enums/last_watched_status.dart';
 import 'package:renter_tree_test/smart_player/src/enums/play_mode.dart';
-import 'package:renter_tree_test/smart_player/src/enums/player_variant.dart';
 
 class BottomSheetScreen extends StatelessWidget {
   const BottomSheetScreen({super.key});
@@ -15,7 +14,7 @@ class BottomSheetScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SmartVideoPlayer(
+          SmartPlayer(
             key: ValueKey('bottom_sheet_1'),
             videoUrl: VideoUrl.url5,
             debugLabelText: "bottom_sheet_1",
@@ -25,8 +24,7 @@ class BottomSheetScreen extends StatelessWidget {
             lastWatchedStatus: LastWatchedState.save,
             isAsset: false,
             looping: true,
-            height: 250,
-            variant: PlayerVariant.list,
+            height: 250
           ),
           SizedBox(height: 35),
           ElevatedButton(
@@ -56,7 +54,7 @@ class BottomSheetScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min, // Wrap content height
             children: [
-              SmartVideoPlayer(
+              SmartPlayer(
                 key: ValueKey('bottom_sheet_2'),
                 videoUrl: VideoUrl.url2,
                 debugLabelText: "bottom_sheet_2",
@@ -66,8 +64,7 @@ class BottomSheetScreen extends StatelessWidget {
                 lastWatchedStatus: LastWatchedState.save,
                 isAsset: false,
                 looping: true,
-                height: 250,
-                variant: PlayerVariant.list,
+                height: 250
               ),
               const SizedBox(height: 24),
               ElevatedButton(

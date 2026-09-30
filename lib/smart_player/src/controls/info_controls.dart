@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../../smart_player.dart';
+import '../../smart_import.dart';
 
 abstract mixin class InfoControls {
   Key? get selectedKey;

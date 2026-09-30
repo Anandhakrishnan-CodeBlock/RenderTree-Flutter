@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter_lazy_indexed_stack/flutter_lazy_indexed_stack.dart';
 import 'package:renter_tree_test/screen/bottom_navigation.dart';
 import 'package:renter_tree_test/screen/bottom_sheet_screen.dart';
 import 'package:renter_tree_test/screen/tab_screen.dart';
-import 'package:renter_tree_test/screen/bottom_nav_children/view_screen.dart';
 import 'package:renter_tree_test/screen/list_screen.dart';
-import 'package:renter_tree_test/screen/grid_screen.dart';
-import 'package:renter_tree_test/smart_player/src/core/smart_manager.dart';
 
 class AppNavigationDrawer extends StatefulWidget {
   const AppNavigationDrawer({super.key});

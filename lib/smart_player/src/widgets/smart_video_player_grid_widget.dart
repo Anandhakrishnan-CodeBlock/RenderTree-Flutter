@@ -4,43 +4,46 @@ import 'package:flutter/scheduler.dart';
 
 import '../../smart_import.dart';
 
-class SmartVideoPlayerWidget extends StatefulWidget {
+class SmartVideoPlayerGridWidget extends StatefulWidget {
   final String videoUrl;
   final String debugLabelText;
-  final String? thumbnailUrl;
+  final String thumbnailUrl;
   final double height;
   final double width;
-  final PlayMode playMode;
   final LastWatchedState lastWatchedStatus;
   final bool? isAsset;
   final bool looping;
   final Color seekBarColor;
+  final VoidCallback onClickGridItem;
 
-  const SmartVideoPlayerWidget({
+  const SmartVideoPlayerGridWidget({
     required Key key,
     required this.videoUrl,
     required this.debugLabelText,
-    this.thumbnailUrl,
+    required this.thumbnailUrl,
     required this.height,
     required this.width,
-    this.playMode = PlayMode.auto,
     this.lastWatchedStatus = LastWatchedState.forgot,
     this.looping = false,
     this.isAsset,
-    this.seekBarColor = Colors.redAccent
+    this.seekBarColor = Colors.redAccent,
+    required this.onClickGridItem,
   }) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _SmartVideoPlayerWidgetState();
+  State<StatefulWidget> createState() => _SmartVideoPlayerGridWidgetState();
 }
 
-class _SmartVideoPlayerWidgetState extends State<SmartVideoPlayerWidget> {
+class _SmartVideoPlayerGridWidgetState extends State<SmartVideoPlayerGridWidget> {
+
   final smartManager = SmartManager();
   late SmartVideoInfo smartVideoInfo;
   late final Stream<PlayerEvent> _videoStream;
   bool _activationScheduled = false;
 
-  PlayerVariant variant = PlayerVariant.detail;
+  PlayerVariant variant = PlayerVariant.grid;
+  PlayMode playMode = PlayMode.auto;
+
   @override
   void initState() {
     smartVideoInfo = SmartVideoInfo(
@@ -48,7 +51,7 @@ class _SmartVideoPlayerWidgetState extends State<SmartVideoPlayerWidget> {
       videoUrl: widget.videoUrl,
       debugLabelText: widget.debugLabelText,
       thumbnailUrl: widget.thumbnailUrl,
-      playMode: widget.playMode,
+      playMode: playMode,
       lastWatchedStatus: widget.lastWatchedStatus,
       isAsset: widget.isAsset,
       looping: widget.looping,
@@ -111,7 +114,7 @@ class _SmartVideoPlayerWidgetState extends State<SmartVideoPlayerWidget> {
                 case PlayerEventStatus.ready:
                   content = VideoFace(
                     controller: event.controller!,
-                    playMode: widget.playMode,
+                    playMode: playMode,
                     variant: variant,
                     seekBarColor: widget.seekBarColor
                   );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:renter_tree_test/constants/video_url.dart';
-import '../smart_player/smart_player.dart';
+import '../smart_player/smart_import.dart';
 
 class GridScreen extends StatefulWidget {
   const GridScreen({super.key});
@@ -28,7 +28,7 @@ class GridScreenState extends State<GridScreen> {
             isFirst: index == 0,
             isLast: index == VideoUrl.videoUrls.length - 1,
             duration: const Duration(milliseconds: 200),
-            child: SmartVideoPlayer(
+            child: SmartGridPlayer(
               key: itemKey,
               videoUrl: VideoUrl.videoUrls[index],
               thumbnailUrl: VideoUrl.thumbnailUrls[index],
@@ -36,9 +36,11 @@ class GridScreenState extends State<GridScreen> {
               height: 100,
               width: double.infinity,
               playMode: PlayMode.auto,
-              variant: PlayerVariant.list,
               lastWatchedStatus: LastWatchedState.save,
               looping: false,
+              onClickGridItem: () {
+                debugPrint('Tapped on Grid $index');
+              },
             ),
           );
         },

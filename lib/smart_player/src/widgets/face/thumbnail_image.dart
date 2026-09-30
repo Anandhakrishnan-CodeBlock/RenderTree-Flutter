@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../smart_player.dart';
+import '../../../smart_import.dart';
 
 final class ThumbnailImage extends StatelessWidget {
   final double width;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../smart_player.dart';
+import '../../../smart_import.dart';
 
 class LoadingThumbnailFace extends StatelessWidget {
   final double width;
@@ -29,6 +29,5 @@ class LoadingThumbnailFace extends StatelessWidget {
             highlightColor: Colors.grey.shade100,
             child: Container(),
           );
-    ;
   }
 }

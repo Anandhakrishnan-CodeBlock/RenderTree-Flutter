@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../smart_player.dart';
+import '../../../smart_import.dart';
 
 final class LoadingFace extends StatefulWidget {
   final double width;

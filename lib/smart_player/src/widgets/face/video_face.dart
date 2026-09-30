@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../../smart_player.dart';
+import '../../../smart_import.dart';
 
 class VideoFace extends StatefulWidget {
   final VideoPlayerController controller;
@@ -16,7 +16,7 @@ class VideoFace extends StatefulWidget {
     required this.controller,
     required this.playMode,
     required this.variant,
-    required this.seekBarColor,
+    required this.seekBarColor
   });
 
   @override
@@ -68,20 +68,17 @@ class VideoFaceState extends State<VideoFace> {
             },
             child: PaintListenerWidget(
               onPaintStateChanged: () {
-                resetTimer(widget.controller);
+                _resetTimer(widget.controller);
               },
               child: VideoPlayer(widget.controller),
             ),
           ),
         ),
-        if (widget.variant == PlayerVariant.list)
+        if (widget.variant != PlayerVariant.detail)
           ListOverlay(
             videoController: widget.controller,
             controlsVisible: _controlsVisible,
-            seekBarColor: widget.seekBarColor,
-            onTap: () {
-              // TODO onClick
-            },
+            seekBarColor: widget.seekBarColor
           )
         else
           DetailOverlay(
@@ -142,7 +139,7 @@ class VideoFaceState extends State<VideoFace> {
     );
   }
 
-  void resetTimer(VideoPlayerController controller) {
+  void _resetTimer(VideoPlayerController controller) {
     debugPrint("Painting !");
     _debounceTimer?.cancel();
     _debounceTimer = Timer(timeoutDuration, () {

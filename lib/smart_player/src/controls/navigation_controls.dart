@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../../smart_player.dart';
+import '../../smart_import.dart';
 
 
 abstract class NavigationControls {

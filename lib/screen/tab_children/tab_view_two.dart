@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:renter_tree_test/constants/video_url.dart';
 import 'package:renter_tree_test/smart_player/smart_list_item.dart';
-import 'package:renter_tree_test/smart_player/smart_video_player.dart';
+import 'package:renter_tree_test/smart_player/smart_list_player.dart';
 import 'package:renter_tree_test/smart_player/src/enums/last_watched_status.dart';
 import 'package:renter_tree_test/smart_player/src/enums/play_mode.dart';
-import 'package:renter_tree_test/smart_player/src/enums/player_variant.dart';
 
 class TabViewTwo extends StatelessWidget {
   const TabViewTwo({super.key});
@@ -23,7 +22,7 @@ class TabViewTwo extends StatelessWidget {
                 isFirst: index == 0,
                 isLast: index == VideoUrl.videoUrls.length - 1,
                 duration: const Duration(milliseconds: 200),
-                child: SmartVideoPlayer(
+                child: SmartListPlayer(
                   key: itemKey,
                   videoUrl: VideoUrl.videoUrls[index],
                   thumbnailUrl: VideoUrl.thumbnailUrls[index],
@@ -31,9 +30,11 @@ class TabViewTwo extends StatelessWidget {
                   height: 320,
                   width: double.infinity,
                   playMode: PlayMode.auto,
-                  variant: PlayerVariant.list,
                   lastWatchedStatus: LastWatchedState.save,
                   looping: false,
+                  onClickListItem: () {
+                    debugPrint('Tapped on Video $index');
+                  },
                 ),
               ),
 

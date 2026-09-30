@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
-import '../../smart_player.dart';
+import '../../smart_import.dart';
 
 class VideoController extends VideoControls {
   VideoController._internal();

@@ -1,6 +1,6 @@
 import 'package:video_player/video_player.dart';
 
-import '../../smart_player.dart';
+import '../../smart_import.dart';
 
 class PlayerController implements PlayerControls {
 
