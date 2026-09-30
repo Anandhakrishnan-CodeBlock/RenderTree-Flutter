@@ -38,7 +38,7 @@ class InfoController extends InfoControls {
 
   Timer? _refreshTimer;
   bool _isThrottling = false;
-  Duration refreshRate = Duration(milliseconds: 200);
+  Duration refreshRate = Duration(milliseconds: 300);
 
   @override
   void setInfo({

@@ -99,6 +99,7 @@ class SmartManager extends NavigationControls{
     _infoControls.clearAll();
     _listControls.clearList();
     Map<Key, SmartVideoInfo> videos = _smartStack.top();
+    _smartStack.pop();
     if (videos.isNotEmpty) {
       _infoControls.setVideos = videos;
       _infoControls.playLastWatchedVideo(startDrawing: (key){
@@ -114,7 +115,7 @@ class SmartManager extends NavigationControls{
     Map<Key, SmartVideoInfo> videos = _infoControls.videos;
     if (videos.isNotEmpty) {
       _infoControls.saveLastWatchedVideo();
-      _infoControls.stopVideo();
+      _infoControls.pauseVideo();
       _smartStack.push(videos);
       _infoControls.clearAll();
       _listControls.clearList();

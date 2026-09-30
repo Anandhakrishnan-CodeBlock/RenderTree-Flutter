@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../smart_import.dart';
@@ -27,6 +28,7 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
   void initState() {
     super.initState();
     _scheduleAutoHide();
+    _playVideo();
   }
 
   @override
@@ -160,5 +162,12 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
         ),
       ),
     );
+  }
+
+  void _playVideo() {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      widget.controller.play();
+    });
   }
 }
