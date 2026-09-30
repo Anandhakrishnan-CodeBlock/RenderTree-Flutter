@@ -1,13 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:renter_tree_test/smart_player/src/enums/play_mode.dart';
-import 'package:renter_tree_test/smart_player/src/enums/player_variant.dart';
-import 'package:renter_tree_test/smart_player/src/render/paint_listener_widget.dart';
-import 'package:renter_tree_test/smart_player/src/widgets/other_widgets/detail_overlay.dart';
-import 'package:renter_tree_test/smart_player/src/widgets/other_widgets/full_screen_video_page.dart';
-import 'package:renter_tree_test/smart_player/src/widgets/other_widgets/list_overlay.dart';
 import 'package:video_player/video_player.dart';
+
+import '../../../smart_player.dart';
 
 class VideoFace extends StatefulWidget {
   final VideoPlayerController controller;

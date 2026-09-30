@@ -1,7 +1,5 @@
 import 'package:flutter/rendering.dart';
 
-import '../../smart_player.dart';
-
 class SmartZoneRenderBox extends RenderProxyBox {
   Key itemKey;
   VoidCallback? onPainted;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:renter_tree_test/smart_player/src/widgets/face/loading_face.dart';
-import 'package:renter_tree_test/smart_player/src/widgets/face/thumbnail_image.dart';
+
+import '../../../smart_player.dart';
 
 class LoadingThumbnailFace extends StatelessWidget {
   final double width;

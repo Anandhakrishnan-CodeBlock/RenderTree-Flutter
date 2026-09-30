@@ -1,7 +1,5 @@
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
-import 'package:renter_tree_test/smart_player/src/controls/info_controls.dart';
-import 'package:renter_tree_test/smart_player/src/controls/list_controls.dart';
 import '../../smart_player.dart';
 
 class SmartListItemWidget extends StatefulWidget {

@@ -1,16 +1,8 @@
 import 'dart:async';
-import 'dart:ffi';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:renter_tree_test/smart_player/src/controls/video_controls.dart';
-import 'package:renter_tree_test/smart_player/src/widgets/face/video_face.dart';
-import 'package:video_player/video_player.dart';
+
 import '../../smart_player.dart';
-import '../controls/navigation_controls.dart';
-import '../render/paint_listener_widget.dart';
-import 'face/loading_thumbnail_face.dart';
 
 class SmartVideoPlayerWidget extends StatefulWidget {
   final String videoUrl;

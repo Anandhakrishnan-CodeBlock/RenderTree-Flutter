@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'package:renter_tree_test/smart_player/smart_player.dart';
+
+import '../../smart_player.dart';
+
 
 abstract class NavigationControls {
   void didPush();

@@ -1,10 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:renter_tree_test/smart_player/src/controls/info_controls.dart';
-import 'package:renter_tree_test/smart_player/src/controls/list_controls.dart';
-import 'package:renter_tree_test/smart_player/src/controls/navigation_controls.dart';
-import 'package:renter_tree_test/smart_player/src/ds/smart_stack.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../smart_player.dart';
