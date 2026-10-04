@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 
 import '../../smart_import.dart';
 
@@ -39,7 +38,6 @@ class _SmartVideoPlayerGridWidgetState extends State<SmartVideoPlayerGridWidget>
   final smartManager = SmartManager();
   late SmartVideoInfo smartVideoInfo;
   late final Stream<PlayerEvent> _videoStream;
-  bool _activationScheduled = false;
 
   PlayerVariant variant = PlayerVariant.grid;
   PlayMode playMode = PlayMode.auto;
@@ -70,64 +68,50 @@ class _SmartVideoPlayerGridWidgetState extends State<SmartVideoPlayerGridWidget>
 
   @override
   Widget build(BuildContext context) {
-    return SmartVideoInfoWidget(
-      key: smartVideoInfo.key,
-      onPaint: (activateOnPaint) {
-        if (activateOnPaint &&
-            smartManager.selectedKey != widget.key &&
-            !_activationScheduled) {
-          _activationScheduled = true;
-          SchedulerBinding.instance.addPostFrameCallback((_) {
-            _activationScheduled = false;
-            smartManager.startDrawing(key: widget.key!);
-          });
-        }
-      },
-      child: SizedBox(
-        height: widget.height,
-        width: widget.width,
-        child: StreamBuilder<PlayerEvent>(
-          stream: _videoStream,
-          initialData: null,
-          builder: (BuildContext context, AsyncSnapshot<PlayerEvent> snapshot) {
-            final event = snapshot.data;
-            final bool isMine = event?.key == widget.key;
-            Widget content;
-            if (!isMine) {
-              content = LoadingThumbnailFace(
-                width: widget.width,
-                height: widget.height,
-                thumbnailUrl: widget.thumbnailUrl,
-              );
-            } else {
-              switch (event!.status) {
-                case PlayerEventStatus.loading:
-                  content = LoadingThumbnailFace(
-                    width: widget.width,
-                    height: widget.height,
-                    thumbnailUrl: widget.thumbnailUrl,
-                  );
-                  break;
-                case PlayerEventStatus.failed:
-                  content = const ErrorFace(text: 'Failed to load video');
-                  break;
-                case PlayerEventStatus.ready:
-                  content = VideoFace(
-                    controller: event.controller!,
-                    playMode: playMode,
-                    variant: variant,
-                    seekBarColor: widget.seekBarColor
-                  );
-                  break;
-              }
-            }
-
-            return AnimatedSwitcher(
-              duration: const Duration(milliseconds: 200),
-              child: content,
+    return SizedBox(
+      height: widget.height,
+      width: widget.width,
+      child: StreamBuilder<PlayerEvent>(
+        stream: _videoStream,
+        initialData: null,
+        builder: (BuildContext context, AsyncSnapshot<PlayerEvent> snapshot) {
+          final event = snapshot.data;
+          final bool isMine = event?.key == widget.key;
+          Widget content;
+          if (!isMine) {
+            content = LoadingThumbnailFace(
+              width: widget.width,
+              height: widget.height,
+              thumbnailUrl: widget.thumbnailUrl,
             );
-          },
-        ),
+          } else {
+            switch (event!.status) {
+              case PlayerEventStatus.loading:
+                content = LoadingThumbnailFace(
+                  width: widget.width,
+                  height: widget.height,
+                  thumbnailUrl: widget.thumbnailUrl,
+                );
+                break;
+              case PlayerEventStatus.failed:
+                content = const ErrorFace(text: 'Failed to load video');
+                break;
+              case PlayerEventStatus.ready:
+                content = VideoFace(
+                  controller: event.controller!,
+                  playMode: playMode,
+                  variant: variant,
+                  seekBarColor: widget.seekBarColor
+                );
+                break;
+            }
+          }
+
+          return AnimatedSwitcher(
+            duration: const Duration(milliseconds: 200),
+            child: content,
+          );
+        },
       ),
     );
   }

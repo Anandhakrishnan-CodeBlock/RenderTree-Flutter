@@ -10,36 +10,51 @@ class GridScreen extends StatefulWidget {
 }
 
 class GridScreenState extends State<GridScreen> {
+  final gridConfig = GridConfig(
+    itemCount: VideoUrl.videoUrls.length,
+    crossAxisCount: 2,
+    childAspectRatio: 9 / 16,
+    mainAxisSpacing: 4,
+    crossAxisSpacing: 4,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10.0,
-          mainAxisSpacing: 10.0,
-          childAspectRatio: 1.0,
+        padding: gridConfig.padding,
+        itemCount: gridConfig.itemCount,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: gridConfig.crossAxisCount,
+          mainAxisSpacing: gridConfig.mainAxisSpacing,
+          crossAxisSpacing: gridConfig.crossAxisSpacing,
+          childAspectRatio: gridConfig.childAspectRatio,
+          mainAxisExtent: gridConfig.mainAxisExtent,
         ),
-        itemCount: VideoUrl.videoUrls.length,
         itemBuilder: (context, index) {
           final itemKey = ValueKey("grid_screen_$index");
-          return SmartListItem(
+          return SmartGridItem(
             itemKey: itemKey,
-            isFirst: index == 0,
-            isLast: index == VideoUrl.videoUrls.length - 1,
-            duration: const Duration(milliseconds: 200),
-            child: SmartGridPlayer(
-              key: itemKey,
-              videoUrl: VideoUrl.videoUrls[index],
-              thumbnailUrl: VideoUrl.thumbnailUrls[index],
-              debugLabelText: 'Grid $index',
-              height: 100,
-              width: double.infinity,
-              playMode: PlayMode.auto,
-              lastWatchedStatus: LastWatchedState.save,
-              looping: false,
-              onClickGridItem: () {
-                debugPrint('Tapped on Grid $index');
+            index: index,
+            gridConfig: gridConfig,
+            visibleThreshold: 0.9,
+            stepExtent: 90,
+            child: LayoutBuilder(
+              builder: (context, c) {
+                return SmartGridPlayer(
+                  key: itemKey,
+                  videoUrl: VideoUrl.videoUrls[index],
+                  thumbnailUrl: VideoUrl.thumbnailUrls[index],
+                  debugLabelText: 'Video $index',
+                  height: c.maxHeight,
+                  width: c.maxWidth,
+                  playMode: PlayMode.auto,
+                  lastWatchedStatus: LastWatchedState.save,
+                  looping: false,
+                  onClickGridItem: () {
+                    debugPrint('Tapped on Video $index');
+                  },
+                );
               },
             ),
           );

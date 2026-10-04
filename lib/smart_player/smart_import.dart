@@ -19,15 +19,18 @@ export 'src/models/smart_video_info.dart';
 export 'src/models/player_events.dart';
 
 export 'src/render/smart_zone_render_box.dart';
-export 'src/render/smart_list_scope.dart';
-export 'src/widgets/inherited_widget/paint_listener_widget.dart';
+export 'src/render/paint_listener_widget.dart';
+export 'src/render/smart_zone_render_object_widget.dart';
 
 export 'src/utils/smart_logger.dart';
 export 'src/utils/smart_params.dart';
 
+export 'src/widgets/inherited_widget/smart_list_scope.dart';
+
 export 'src/widgets/smart_video_info_widget.dart';
 export 'src/widgets/smart_video_player_widget.dart';
 export 'src/widgets/smart_list_item_widget.dart';
+export 'src/widgets/smart_grid_item_widget.dart';
 
 export 'src/widgets/face/error_face.dart';
 export 'src/widgets/face/loading_face.dart';
@@ -42,6 +45,7 @@ export 'src/widgets/other_widgets/list_overlay.dart';
 export 'src/widgets/other_widgets/mute_toggle_button.dart';
 export 'src/widgets/other_widgets/seek_bar.dart';
 
+export 'src/models/grid_config.dart' show GridConfig;
 export 'src/enums/play_mode.dart' show PlayMode;
 export 'src/enums/last_watched_status.dart' show LastWatchedState;
 export 'src/enums/viewport_zone.dart' show ViewportZone;
@@ -52,6 +56,7 @@ export 'smart_player.dart' show SmartPlayer;
 export 'smart_list_player.dart' show SmartListPlayer;
 export 'smart_grid_player.dart' show SmartGridPlayer;
 export 'smart_list_item.dart' show SmartListItem;
+export 'smart_grid_item.dart' show SmartGridItem;
 
 
 
