@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:renter_tree_test/screen/bottom_navigation.dart';
 import 'package:renter_tree_test/screen/bottom_sheet_screen.dart';
+import 'package:renter_tree_test/screen/grid_screen.dart';
 import 'package:renter_tree_test/screen/tab_screen.dart';
 import 'package:renter_tree_test/screen/list_screen.dart';
 
@@ -19,7 +20,7 @@ class AppNavigationDrawerState extends State<AppNavigationDrawer> {
     BottomNavigation(),
     BottomSheetScreen(),
     ListScreen(),
-    //GridScreen(),
+    GridScreen(),
   ];
   final List<String> _title = [
     "All",
@@ -27,7 +28,7 @@ class AppNavigationDrawerState extends State<AppNavigationDrawer> {
     "Bottom Navigation Bar",
     "Bottom Sheet",
     "List View",
-    //"Grid View",
+    "Grid View",
   ];
 
   @override
@@ -75,11 +76,11 @@ class AppNavigationDrawerState extends State<AppNavigationDrawer> {
             selectedIcon: Icon(Icons.view_list_rounded),
             label: Text('List View'),
           ),
-          /*const NavigationDrawerDestination(
+          const NavigationDrawerDestination(
             icon: Icon(Icons.grid_view),
             selectedIcon: Icon(Icons.grid_view_rounded),
             label: Text('Grid View'),
-          ),*/
+          ),
         ],
       ),
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:renter_tree_test/constants/video_url.dart';
+import 'package:renter_tree_test/smart_player/src/assets/image_urls.dart';
+import 'package:renter_tree_test/smart_player/src/assets/video_urls.dart';
 import '../smart_player/smart_import.dart';
 
 class ListScreen extends StatefulWidget {
@@ -14,7 +15,7 @@ class ListScreenState extends State<ListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-        itemCount: VideoUrl.videoUrls.length,
+        itemCount: ImageUrls.landscapeListImages.length,
         itemBuilder: (context, index) {
           final itemKey = ValueKey("list_screen_$index");
           return Column(
@@ -22,14 +23,14 @@ class ListScreenState extends State<ListScreen> {
               SmartListItem(
                 itemKey: itemKey,
                 isFirst: index == 0,
-                isLast: index == VideoUrl.videoUrls.length - 1,
+                isLast: index == ImageUrls.landscapeListImages.length - 1,
                 duration: const Duration(milliseconds: 200),
                 child: SmartListPlayer(
                   key: itemKey,
-                  videoUrl: VideoUrl.videoUrls[index],
-                  thumbnailUrl: VideoUrl.thumbnailUrls[index],
+                  videoUrl: VideoUrls.landscapeVideo,
+                  thumbnailUrl: ImageUrls.landscapeListImages[index],
                   debugLabelText: 'Video $index',
-                  height: 320,
+                  height: 240,
                   width: double.infinity,
                   playMode: PlayMode.auto,
                   lastWatchedStatus: LastWatchedState.save,

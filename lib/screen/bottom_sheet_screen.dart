@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:renter_tree_test/constants/video_url.dart';
 import 'package:renter_tree_test/smart_player/smart_player.dart';
+import 'package:renter_tree_test/smart_player/src/assets/image_urls.dart';
+import 'package:renter_tree_test/smart_player/src/assets/video_urls.dart';
 import 'package:renter_tree_test/smart_player/src/enums/last_watched_status.dart';
 import 'package:renter_tree_test/smart_player/src/enums/play_mode.dart';
 
@@ -16,10 +17,10 @@ class BottomSheetScreen extends StatelessWidget {
         children: [
           SmartPlayer(
             key: ValueKey('bottom_sheet_1'),
-            videoUrl: VideoUrl.url5,
+            videoUrl: VideoUrls.landscapeVideo,
             debugLabelText: "bottom_sheet_1",
             width: double.infinity,
-            thumbnailUrl: VideoUrl.thumbnailUrls[7],
+            thumbnailUrl: ImageUrls.landscapeImages[9],
             playMode: PlayMode.auto,
             lastWatchedStatus: LastWatchedState.save,
             isAsset: false,
@@ -56,10 +57,10 @@ class BottomSheetScreen extends StatelessWidget {
             children: [
               SmartPlayer(
                 key: ValueKey('bottom_sheet_2'),
-                videoUrl: VideoUrl.url2,
+                videoUrl: VideoUrls.landscapeVideo,
                 debugLabelText: "bottom_sheet_2",
                 width: double.infinity,
-                thumbnailUrl: VideoUrl.thumbnailUrls[3],
+                thumbnailUrl: ImageUrls.landscapeImages[30],
                 playMode: PlayMode.auto,
                 lastWatchedStatus: LastWatchedState.save,
                 isAsset: false,

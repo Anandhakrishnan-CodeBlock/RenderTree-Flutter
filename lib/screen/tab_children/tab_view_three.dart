@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:renter_tree_test/constants/video_url.dart';
 import 'package:renter_tree_test/smart_player/smart_player.dart';
+import 'package:renter_tree_test/smart_player/src/assets/image_urls.dart';
+import 'package:renter_tree_test/smart_player/src/assets/video_urls.dart';
 import 'package:renter_tree_test/smart_player/src/enums/last_watched_status.dart';
 import 'package:renter_tree_test/smart_player/src/enums/play_mode.dart';
 
@@ -17,10 +18,10 @@ class TabViewThree extends StatelessWidget {
             children: [
               SmartPlayer(
                 key: ValueKey("tab_view_three"),
-                videoUrl: VideoUrl.url4,
+                videoUrl: VideoUrls.landscapeVideo,
                 debugLabelText: "tab_view_three",
                 width: double.infinity,
-                thumbnailUrl: VideoUrl.thumbnailUrls[4],
+                thumbnailUrl: ImageUrls.landscapeImages[4],
                 playMode: PlayMode.auto,
                 lastWatchedStatus: LastWatchedState.save,
                 isAsset: false,

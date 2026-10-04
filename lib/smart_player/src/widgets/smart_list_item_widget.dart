@@ -118,7 +118,7 @@ class _SmartListItemWidgetState extends State<SmartListItemWidget> {
   @override
   Widget build(BuildContext context) {
     return SmartListScope(
-      child: _SmartZoneRenderObjectWidget(
+      child: SmartZoneRenderObjectWidget(
         itemKey: widget.itemKey,
         onRenderObjectCreated: (box) {
           _renderBox = box;
@@ -127,35 +127,5 @@ class _SmartListItemWidgetState extends State<SmartListItemWidget> {
         child: widget.child,
       ),
     );
-  }
-}
-
-class _SmartZoneRenderObjectWidget extends SingleChildRenderObjectWidget {
-  final Key itemKey;
-  final ValueChanged<SmartZoneRenderBox> onRenderObjectCreated;
-  final VoidCallback onPainted;
-
-  const _SmartZoneRenderObjectWidget({
-    required this.itemKey,
-    required this.onRenderObjectCreated,
-    required this.onPainted,
-    required Widget child,
-  }) : super(child: child);
-
-  @override
-  SmartZoneRenderBox createRenderObject(BuildContext context) {
-    final box = SmartZoneRenderBox(
-      itemKey: itemKey,
-      onPainted: onPainted,
-    );
-    onRenderObjectCreated(box);
-    return box;
-  }
-
-  @override
-  void updateRenderObject(BuildContext context, SmartZoneRenderBox renderObject) {
-    renderObject
-      ..itemKey = itemKey
-      ..onPainted = onPainted;
   }
 }
