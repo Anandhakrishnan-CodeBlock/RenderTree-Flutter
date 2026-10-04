@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:renter_tree_test/constants/video_url.dart';
+import 'package:renter_tree_test/smart_player/src/assets/image_urls.dart';
+import 'package:renter_tree_test/smart_player/src/assets/video_urls.dart';
 import '../smart_player/smart_import.dart';
 
 class GridScreen extends StatefulWidget {
@@ -11,7 +12,7 @@ class GridScreen extends StatefulWidget {
 
 class GridScreenState extends State<GridScreen> {
   final gridConfig = GridConfig(
-    itemCount: VideoUrl.videoUrls.length,
+    itemCount: ImageUrls.portraitListImages.length,
     crossAxisCount: 2,
     childAspectRatio: 9 / 16,
     mainAxisSpacing: 4,
@@ -43,8 +44,8 @@ class GridScreenState extends State<GridScreen> {
               builder: (context, c) {
                 return SmartGridPlayer(
                   key: itemKey,
-                  videoUrl: VideoUrl.videoUrls[index],
-                  thumbnailUrl: VideoUrl.thumbnailUrls[index],
+                  videoUrl: VideoUrls.portraitVideo,
+                  thumbnailUrl: ImageUrls.portraitListImages[index],
                   debugLabelText: 'Video $index',
                   height: c.maxHeight,
                   width: c.maxWidth,

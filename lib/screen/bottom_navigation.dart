@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:renter_tree_test/constants/video_url.dart';
 import 'package:renter_tree_test/screen/bottom_nav_children/view_screen.dart';
+import 'package:renter_tree_test/smart_player/src/assets/image_urls.dart';
+import 'package:renter_tree_test/smart_player/src/assets/video_urls.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
@@ -15,20 +16,20 @@ class BottomNavigationState extends State<BottomNavigation> {
     ViewScreen(
       valueKey: ValueKey("index_0"),
       debugLabelText: "index_0",
-      thumbnailUrl: VideoUrl.thumbnailUrls[0],
-      videoUrl: VideoUrl.url1,
+      thumbnailUrl: ImageUrls.landscapeImages[10],
+      videoUrl: VideoUrls.landscapeVideo,
     ),
     ViewScreen(
       valueKey: ValueKey("index_1"),
       debugLabelText: "index_1",
-      thumbnailUrl: VideoUrl.thumbnailUrls[1],
-      videoUrl: VideoUrl.url2,
+      thumbnailUrl: ImageUrls.landscapeImages[15],
+      videoUrl: VideoUrls.landscapeVideo,
     ),
     ViewScreen(
       valueKey: ValueKey("index_2"),
       debugLabelText: "index_2",
-      thumbnailUrl: VideoUrl.thumbnailUrls[2],
-      videoUrl: VideoUrl.url3,
+      thumbnailUrl: ImageUrls.landscapeImages[20],
+      videoUrl: VideoUrls.landscapeVideo,
     ),
   ];
 
