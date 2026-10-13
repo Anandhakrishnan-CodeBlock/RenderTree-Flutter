@@ -25,6 +25,8 @@ class BottomSheetScreen extends StatelessWidget {
             lastWatchedStatus: LastWatchedState.save,
             isAsset: false,
             looping: true,
+            showProgressBar: true,
+            showProgressDuration: true,
             height: 250
           ),
           SizedBox(height: 35),
@@ -60,11 +62,13 @@ class BottomSheetScreen extends StatelessWidget {
                 videoUrl: VideoUrls.landscapeVideo,
                 debugLabelText: "bottom_sheet_2",
                 width: double.infinity,
-                thumbnailUrl: ImageUrls.landscapeImages[30],
+                thumbnailUrl: ImageUrls.landscapeImages[29],
                 playMode: PlayMode.auto,
                 lastWatchedStatus: LastWatchedState.save,
                 isAsset: false,
                 looping: true,
+                showProgressBar: true,
+                showProgressDuration: true,
                 height: 250
               ),
               const SizedBox(height: 24),

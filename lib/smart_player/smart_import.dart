@@ -31,6 +31,7 @@ export 'src/widgets/smart_video_info_widget.dart';
 export 'src/widgets/smart_video_player_widget.dart';
 export 'src/widgets/smart_list_item_widget.dart';
 export 'src/widgets/smart_grid_item_widget.dart';
+export 'src/widgets/smart_video_player_web_macos_widget.dart';
 
 export 'src/widgets/face/error_face.dart';
 export 'src/widgets/face/loading_face.dart';
@@ -57,6 +58,7 @@ export 'smart_list_player.dart' show SmartListPlayer;
 export 'smart_grid_player.dart' show SmartGridPlayer;
 export 'smart_list_item.dart' show SmartListItem;
 export 'smart_grid_item.dart' show SmartGridItem;
+export 'smart_web_macos_grid_player.dart' show SmartWebMacosGridPlayer;
 
 
 

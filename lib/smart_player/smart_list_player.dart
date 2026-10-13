@@ -8,12 +8,14 @@ class SmartListPlayer extends StatelessWidget {
   final String thumbnailUrl;
   final double height;
   final double width;
-  final PlayMode playMode;
   final LastWatchedState lastWatchedStatus;
   final bool? isAsset;
   final bool looping;
   final Color seekBarColor;
   final VoidCallback onClickListItem;
+  final bool? showProgressBar;
+  final bool? showProgressDuration;
+  final Function? onError;
 
   const SmartListPlayer({
     required Key key,
@@ -22,12 +24,14 @@ class SmartListPlayer extends StatelessWidget {
     required this.thumbnailUrl,
     required this.height,
     required this.width,
-    this.playMode = PlayMode.auto,
     this.lastWatchedStatus = LastWatchedState.forgot,
     this.looping = false,
     this.isAsset,
     this.seekBarColor = Colors.redAccent,
-    required this.onClickListItem
+    required this.onClickListItem,
+    this.showProgressBar = false,
+    this.showProgressDuration = false,
+    this.onError
   }) : super(key: key);
 
   @override
@@ -44,6 +48,9 @@ class SmartListPlayer extends StatelessWidget {
       looping: looping,
       seekBarColor: seekBarColor,
       onClickListItem: onClickListItem,
+      showProgressBar: showProgressBar,
+      showProgressDuration: showProgressDuration,
+      onError: onError,
     );
   }
 }

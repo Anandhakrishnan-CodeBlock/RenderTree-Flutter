@@ -37,6 +37,8 @@ class ViewScreenState extends State<ViewScreen> {
             lastWatchedStatus: LastWatchedState.save,
             isAsset: false,
             looping: true,
+            showProgressBar: true,
+            showProgressDuration: true,
             height: 250
           ),
         ],

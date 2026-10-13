@@ -30,9 +30,10 @@ class TabViewTwo extends StatelessWidget {
                   debugLabelText: 'Video $index',
                   height: 240,
                   width: double.infinity,
-                  playMode: PlayMode.auto,
                   lastWatchedStatus: LastWatchedState.save,
                   looping: false,
+                  showProgressBar: true,
+                  showProgressDuration: true,
                   onClickListItem: () {
                     debugPrint('Tapped on Video $index');
                   },
@@ -45,10 +46,7 @@ class TabViewTwo extends StatelessWidget {
                   child: Icon(Icons.insert_emoticon, color: Colors.white),
                 ),
                 title: const Text('John Doe'),
-                subtitle: const Text('Available • Tap to chat'),
-                onTap: () {
-                  debugPrint('Tapped on John Doe');
-                },
+                subtitle: const Text('Available • Tap to chat')
               ),
             ],
           );

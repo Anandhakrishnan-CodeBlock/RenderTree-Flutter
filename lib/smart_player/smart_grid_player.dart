@@ -8,12 +8,12 @@ class SmartGridPlayer extends StatelessWidget {
   final String thumbnailUrl;
   final double height;
   final double width;
-  final PlayMode playMode;
   final LastWatchedState lastWatchedStatus;
   final bool? isAsset;
   final bool looping;
   final Color seekBarColor;
   final VoidCallback onClickGridItem;
+  final Function? onError;
 
   const SmartGridPlayer({
     required Key key,
@@ -22,12 +22,12 @@ class SmartGridPlayer extends StatelessWidget {
     required this.thumbnailUrl,
     required this.height,
     required this.width,
-    this.playMode = PlayMode.auto,
     this.lastWatchedStatus = LastWatchedState.forgot,
     this.looping = false,
     this.isAsset,
     this.seekBarColor = Colors.redAccent,
     required this.onClickGridItem,
+    this.onError
   }) : super(key: key);
 
   @override
@@ -44,6 +44,7 @@ class SmartGridPlayer extends StatelessWidget {
       looping: looping,
       seekBarColor: seekBarColor,
       onClickGridItem: onClickGridItem,
+      onError: onError,
     );
   }
 }

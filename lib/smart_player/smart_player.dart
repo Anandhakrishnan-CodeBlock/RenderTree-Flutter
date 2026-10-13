@@ -12,6 +12,8 @@ class SmartPlayer extends StatelessWidget {
   final bool? isAsset;
   final bool looping;
   final Color seekBarColor;
+  final bool? showProgressBar;
+  final bool? showProgressDuration;
 
   const SmartPlayer({
     required Key key,
@@ -25,6 +27,8 @@ class SmartPlayer extends StatelessWidget {
     this.looping = false,
     this.isAsset,
     this.seekBarColor = Colors.redAccent,
+    this.showProgressBar = false,
+    this.showProgressDuration = false
   }) : super(key: key);
 
   @override
@@ -41,6 +45,8 @@ class SmartPlayer extends StatelessWidget {
       isAsset: isAsset,
       looping: looping,
       seekBarColor: seekBarColor,
+      showProgressBar: showProgressBar,
+      showProgressDuration: showProgressDuration,
     );
   }
 }

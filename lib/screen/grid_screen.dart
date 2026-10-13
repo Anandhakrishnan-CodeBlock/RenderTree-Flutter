@@ -49,7 +49,6 @@ class GridScreenState extends State<GridScreen> {
                   debugLabelText: 'Video $index',
                   height: c.maxHeight,
                   width: c.maxWidth,
-                  playMode: PlayMode.auto,
                   lastWatchedStatus: LastWatchedState.save,
                   looping: false,
                   onClickGridItem: () {

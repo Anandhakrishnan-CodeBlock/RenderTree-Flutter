@@ -14,6 +14,9 @@ class SmartVideoPlayerListWidget extends StatefulWidget {
   final bool looping;
   final Color seekBarColor;
   final VoidCallback onClickListItem;
+  final bool? showProgressBar;
+  final bool? showProgressDuration;
+  final Function? onError;
 
   const SmartVideoPlayerListWidget({
     required Key key,
@@ -27,6 +30,9 @@ class SmartVideoPlayerListWidget extends StatefulWidget {
     this.isAsset,
     this.seekBarColor = Colors.redAccent,
     required this.onClickListItem,
+    this.showProgressBar = false,
+    this.showProgressDuration = false,
+    this.onError,
   }) : super(key: key);
 
   @override
@@ -74,47 +80,66 @@ class _SmartVideoPlayerListWidgetState extends State<SmartVideoPlayerListWidget>
       child: SizedBox(
         height: widget.height,
         width: widget.width,
-        child: StreamBuilder<PlayerEvent>(
-          stream: _videoStream,
-          initialData: null,
-          builder: (BuildContext context, AsyncSnapshot<PlayerEvent> snapshot) {
-            final event = snapshot.data;
-            final bool isMine = event?.key == widget.key;
-            Widget content;
-            if (!isMine) {
-              content = LoadingThumbnailFace(
-                width: widget.width,
-                height: widget.height,
-                thumbnailUrl: widget.thumbnailUrl,
-              );
-            } else {
-              switch (event!.status) {
-                case PlayerEventStatus.loading:
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            StreamBuilder<PlayerEvent>(
+              stream: _videoStream,
+              initialData: null,
+              builder: (BuildContext context, AsyncSnapshot<PlayerEvent> snapshot) {
+                final event = snapshot.data;
+                final bool isMine = event?.key == widget.key;
+                Widget content;
+                if (!isMine) {
                   content = LoadingThumbnailFace(
                     width: widget.width,
                     height: widget.height,
                     thumbnailUrl: widget.thumbnailUrl,
                   );
-                  break;
-                case PlayerEventStatus.failed:
-                  content = const ErrorFace(text: 'Failed to load video');
-                  break;
-                case PlayerEventStatus.ready:
-                  content = VideoFace(
-                    controller: event.controller!,
-                    playMode: playMode,
-                    variant: variant,
-                    seekBarColor: widget.seekBarColor
-                  );
-                  break;
-              }
-            }
+                } else {
+                  switch (event!.status) {
+                    case PlayerEventStatus.loading:
+                      content = LoadingThumbnailFace(
+                        width: widget.width,
+                        height: widget.height,
+                        thumbnailUrl: widget.thumbnailUrl,
+                      );
+                      break;
+                    case PlayerEventStatus.failed:
+                      content = const ErrorFace(text: 'Failed to load video');
+                      widget.onError?.call(event.error);
+                      break;
+                    case PlayerEventStatus.ready:
+                      content = VideoFace(
+                        controller: event.controller!,
+                        playMode: playMode,
+                        variant: variant,
+                        seekBarColor: widget.seekBarColor,
+                        showProgressBar: widget.showProgressBar ?? false,
+                        showProgressDuration: widget.showProgressDuration ?? false,
+                      );
+                      break;
+                  }
+                }
 
-            return AnimatedSwitcher(
-              duration: const Duration(milliseconds: 200),
-              child: content,
-            );
-          },
+                return AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 200),
+                  child: content,
+                );
+              },
+            ),
+
+            Positioned.fill(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {
+                    widget.onClickListItem();
+                  },
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

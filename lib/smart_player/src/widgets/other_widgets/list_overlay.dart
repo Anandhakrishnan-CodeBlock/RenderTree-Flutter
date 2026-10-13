@@ -7,12 +7,16 @@ class ListOverlay extends StatelessWidget {
   final VideoPlayerController videoController;
   final bool controlsVisible;
   final Color seekBarColor;
+  final bool showProgressBar;
+  final bool showProgressDuration;
 
   const ListOverlay({
     super.key,
     required this.videoController,
     required this.controlsVisible,
-    required this.seekBarColor
+    required this.seekBarColor,
+    required this.showProgressBar,
+    required this.showProgressDuration
   });
 
   @override
@@ -32,14 +36,20 @@ class ListOverlay extends StatelessWidget {
                   crossAxisAlignment: .end,
                   mainAxisSize: .min,
                   children: [
-                    DurationBadge(
-                      position: value.position,
-                      duration: value.duration,
+                    Visibility(
+                      visible: showProgressDuration,
+                      child: DurationBadge(
+                        position: value.position,
+                        duration: value.duration,
+                      ),
                     ),
-                    SeekBar(
-                      controller: videoController,
-                      color: seekBarColor,
-                      compact: true,
+                    Visibility(
+                      visible: showProgressBar,
+                      child: SeekBar(
+                        controller: videoController,
+                        color: seekBarColor,
+                        compact: true,
+                      ),
                     ),
                   ],
                 );

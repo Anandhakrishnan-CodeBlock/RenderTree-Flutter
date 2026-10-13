@@ -4,6 +4,7 @@ import 'package:renter_tree_test/screen/bottom_sheet_screen.dart';
 import 'package:renter_tree_test/screen/grid_screen.dart';
 import 'package:renter_tree_test/screen/tab_screen.dart';
 import 'package:renter_tree_test/screen/list_screen.dart';
+import 'package:renter_tree_test/screen/web_macos_grid_screen.dart';
 
 class AppNavigationDrawer extends StatefulWidget {
   const AppNavigationDrawer({super.key});
@@ -21,6 +22,7 @@ class AppNavigationDrawerState extends State<AppNavigationDrawer> {
     BottomSheetScreen(),
     ListScreen(),
     GridScreen(),
+    WebMacosGridScreen()
   ];
   final List<String> _title = [
     "All",
@@ -29,6 +31,7 @@ class AppNavigationDrawerState extends State<AppNavigationDrawer> {
     "Bottom Sheet",
     "List View",
     "Grid View",
+    "Web / Mac OS Grid View",
   ];
 
   @override
@@ -80,6 +83,11 @@ class AppNavigationDrawerState extends State<AppNavigationDrawer> {
             icon: Icon(Icons.grid_view),
             selectedIcon: Icon(Icons.grid_view_rounded),
             label: Text('Grid View'),
+          ),
+          const NavigationDrawerDestination(
+            icon: Icon(Icons.grid_view),
+            selectedIcon: Icon(Icons.grid_view_rounded),
+            label: Text('Web / Mac OS Grid View'),
           ),
         ],
       ),

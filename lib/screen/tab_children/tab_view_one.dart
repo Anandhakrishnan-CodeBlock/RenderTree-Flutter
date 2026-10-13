@@ -23,8 +23,9 @@ class TabViewOne extends StatelessWidget {
             thumbnailUrl: ImageUrls.landscapeImages[8],
             playMode: PlayMode.auto,
             lastWatchedStatus: LastWatchedState.save,
-            isAsset: false,
             looping: true,
+            showProgressBar: true,
+            showProgressDuration: true,
             height: 250
           ),
         ],

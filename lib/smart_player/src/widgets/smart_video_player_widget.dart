@@ -15,6 +15,8 @@ class SmartVideoPlayerWidget extends StatefulWidget {
   final bool? isAsset;
   final bool looping;
   final Color seekBarColor;
+  final bool? showProgressBar;
+  final bool? showProgressDuration;
 
   const SmartVideoPlayerWidget({
     required Key key,
@@ -27,7 +29,9 @@ class SmartVideoPlayerWidget extends StatefulWidget {
     this.lastWatchedStatus = LastWatchedState.forgot,
     this.looping = false,
     this.isAsset,
-    this.seekBarColor = Colors.redAccent
+    this.seekBarColor = Colors.redAccent,
+    this.showProgressBar = false,
+    this.showProgressDuration = false
   }) : super(key: key);
 
   @override
@@ -113,7 +117,9 @@ class _SmartVideoPlayerWidgetState extends State<SmartVideoPlayerWidget> {
                     controller: event.controller!,
                     playMode: widget.playMode,
                     variant: variant,
-                    seekBarColor: widget.seekBarColor
+                    seekBarColor: widget.seekBarColor,
+                    showProgressBar: widget.showProgressBar ?? false,
+                    showProgressDuration: widget.showProgressDuration ?? false,
                   );
                   break;
               }

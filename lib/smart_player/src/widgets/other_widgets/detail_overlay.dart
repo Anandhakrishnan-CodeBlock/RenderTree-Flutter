@@ -10,6 +10,8 @@ class DetailOverlay extends StatelessWidget {
   final VoidCallback toggleControls;
   final VoidCallback openFullscreen;
   final VoidCallback togglePlayPause;
+  final bool showProgressBar;
+  final bool showProgressDuration;
 
   const DetailOverlay({
     super.key,
@@ -19,6 +21,8 @@ class DetailOverlay extends StatelessWidget {
     required this.toggleControls,
     required this.openFullscreen,
     required this.togglePlayPause,
+    required this.showProgressBar,
+    required this.showProgressDuration
   });
 
   @override
@@ -68,9 +72,12 @@ class DetailOverlay extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              DurationBadge(
-                                position: value.position,
-                                duration: value.duration,
+                              Visibility(
+                                visible: showProgressDuration,
+                                child: DurationBadge(
+                                  position: value.position,
+                                  duration: value.duration,
+                                ),
                               ),
                               Spacer(),
                               IconButton(
@@ -82,9 +89,12 @@ class DetailOverlay extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SeekBar(
-                            controller: videoController,
-                            color: seekBarColor,
+                          Visibility(
+                            visible: showProgressBar,
+                            child: SeekBar(
+                              controller: videoController,
+                              color: seekBarColor,
+                            ),
                           ),
                         ],
                       );

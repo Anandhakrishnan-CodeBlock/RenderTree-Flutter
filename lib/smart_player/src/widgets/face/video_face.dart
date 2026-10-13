@@ -10,13 +10,17 @@ class VideoFace extends StatefulWidget {
   final PlayMode playMode;
   final PlayerVariant variant;
   final Color seekBarColor;
+  final bool showProgressBar;
+  final bool showProgressDuration;
 
   const VideoFace({
     super.key,
     required this.controller,
     required this.playMode,
     required this.variant,
-    required this.seekBarColor
+    required this.seekBarColor,
+    required this.showProgressBar,
+    required this.showProgressDuration
   });
 
   @override
@@ -67,8 +71,10 @@ class VideoFaceState extends State<VideoFace> {
               );
             },
             child: PaintListenerWidget(
-              onPaintStateChanged: () {
-                _resetTimer(widget.controller);
+              onPaintStateChanged: (isPainting) {
+                if (!isPainting) {
+                  _resetTimer(widget.controller);
+                }
               },
               child: VideoPlayer(widget.controller),
             ),
@@ -78,13 +84,17 @@ class VideoFaceState extends State<VideoFace> {
           ListOverlay(
             videoController: widget.controller,
             controlsVisible: _controlsVisible,
-            seekBarColor: widget.seekBarColor
+            seekBarColor: widget.seekBarColor,
+            showProgressBar: widget.showProgressBar,
+            showProgressDuration: widget.showProgressDuration,
           )
         else
           DetailOverlay(
             videoController: widget.controller,
             controlsVisible: _controlsVisible,
             seekBarColor: widget.seekBarColor,
+            showProgressBar: widget.showProgressBar,
+            showProgressDuration: widget.showProgressDuration,
             openFullscreen: () {
               _openFullscreen(widget.controller);
             },
@@ -140,7 +150,6 @@ class VideoFaceState extends State<VideoFace> {
   }
 
   void _resetTimer(VideoPlayerController controller) {
-    debugPrint("Painting !");
     _debounceTimer?.cancel();
     _debounceTimer = Timer(timeoutDuration, () {
       controller.pause();
