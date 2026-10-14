@@ -4,35 +4,35 @@ import 'package:flutter/material.dart';
 import '../../smart_import.dart';
 
 class SmartVideoPlayerGridWidget extends StatefulWidget {
-  final String videoUrl;
-  final String debugLabelText;
-  final String thumbnailUrl;
   final double height;
   final double width;
-  final LastWatchedState lastWatchedStatus;
+  final String debugLabelText;
+  final String thumbnailUrl;
+  final String videoUrl;
   final bool? isAsset;
-  final bool looping;
-  final Color seekBarColor;
-  final VoidCallback onClickGridItem;
+  final LastWatchedState? lastWatchedState;
+  final bool? looping;
   final bool? showProgressBar;
   final bool? showProgressDuration;
+  final VoidCallback onClickGridItem;
   final Function? onError;
+  final BorderRadiusGeometry? borderRadius;
 
   const SmartVideoPlayerGridWidget({
     required Key key,
-    required this.videoUrl,
-    required this.debugLabelText,
-    required this.thumbnailUrl,
     required this.height,
     required this.width,
-    this.lastWatchedStatus = LastWatchedState.forgot,
-    this.looping = false,
+    required this.debugLabelText,
+    required this.thumbnailUrl,
+    required this.videoUrl,
     this.isAsset,
-    this.seekBarColor = Colors.redAccent,
+    this.lastWatchedState,
+    this.looping,
+    this.showProgressBar,
+    this.showProgressDuration,
     required this.onClickGridItem,
-    this.showProgressBar = false,
-    this.showProgressDuration = false,
-    this.onError
+    this.onError,
+    this.borderRadius
   }) : super(key: key);
 
   @override
@@ -47,6 +47,12 @@ class _SmartVideoPlayerGridWidgetState extends State<SmartVideoPlayerGridWidget>
 
   PlayerVariant variant = PlayerVariant.grid;
   PlayMode playMode = PlayMode.auto;
+  late BorderRadiusGeometry borderRadius = widget.borderRadius ?? BorderRadiusGeometry.zero;
+  late LastWatchedState lastWatchedState = widget.lastWatchedState ?? LastWatchedState.forgot;
+  late bool isAsset = widget.isAsset ?? false;
+  late bool looping = widget.looping ?? false;
+  late bool showProgressBar = widget.showProgressBar ?? false;
+  late bool showProgressDuration = widget.showProgressDuration ?? false;
 
   @override
   void initState() {
@@ -56,9 +62,9 @@ class _SmartVideoPlayerGridWidgetState extends State<SmartVideoPlayerGridWidget>
       debugLabelText: widget.debugLabelText,
       thumbnailUrl: widget.thumbnailUrl,
       playMode: playMode,
-      lastWatchedStatus: widget.lastWatchedStatus,
-      isAsset: widget.isAsset,
-      looping: widget.looping,
+      lastWatchedState: lastWatchedState,
+      isAsset: isAsset,
+      looping: looping,
     );
     _videoStream = smartManager.selectedVideo;
 
@@ -74,69 +80,72 @@ class _SmartVideoPlayerGridWidgetState extends State<SmartVideoPlayerGridWidget>
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: widget.height,
-      width: widget.width,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          StreamBuilder<PlayerEvent>(
-            stream: _videoStream,
-            initialData: null,
-            builder: (BuildContext context, AsyncSnapshot<PlayerEvent> snapshot) {
-              final event = snapshot.data;
-              final bool isMine = event?.key == widget.key;
-              Widget content;
-              if (!isMine) {
-                content = LoadingThumbnailFace(
-                  width: widget.width,
-                  height: widget.height,
-                  thumbnailUrl: widget.thumbnailUrl,
-                );
-              } else {
-                switch (event!.status) {
-                  case PlayerEventStatus.loading:
-                    content = LoadingThumbnailFace(
-                      width: widget.width,
-                      height: widget.height,
-                      thumbnailUrl: widget.thumbnailUrl,
-                    );
-                    break;
-                  case PlayerEventStatus.failed:
-                    content = const ErrorFace(text: 'Failed to load video');
-                    widget.onError?.call(event.error);
-                    break;
-                  case PlayerEventStatus.ready:
-                    content = VideoFace(
-                      controller: event.controller!,
-                      playMode: playMode,
-                      variant: variant,
-                      seekBarColor: widget.seekBarColor,
-                      showProgressBar: widget.showProgressBar ?? false,
-                      showProgressDuration: widget.showProgressDuration ?? false,
-                    );
-                    break;
+    return ClipRRect(
+      borderRadius: borderRadius,
+      child: SizedBox(
+        height: widget.height,
+        width: widget.width,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            StreamBuilder<PlayerEvent>(
+              stream: _videoStream,
+              initialData: null,
+              builder: (BuildContext context, AsyncSnapshot<PlayerEvent> snapshot) {
+                final event = snapshot.data;
+                final bool isMine = event?.key == widget.key;
+                Widget content;
+                if (!isMine) {
+                  content = LoadingThumbnailFace(
+                    width: widget.width,
+                    height: widget.height,
+                    thumbnailUrl: widget.thumbnailUrl,
+                  );
+                } else {
+                  switch (event!.status) {
+                    case PlayerEventStatus.loading:
+                      content = LoadingThumbnailFace(
+                        width: widget.width,
+                        height: widget.height,
+                        thumbnailUrl: widget.thumbnailUrl,
+                      );
+                      break;
+                    case PlayerEventStatus.failed:
+                      content = const ErrorFace(text: 'Failed to load video');
+                      widget.onError?.call(event.error);
+                      break;
+                    case PlayerEventStatus.ready:
+                      content = VideoFace(
+                        controller: event.controller!,
+                        playMode: playMode,
+                        variant: variant,
+                        seekBarColor: Colors.redAccent,
+                        showProgressBar: showProgressBar,
+                        showProgressDuration: showProgressDuration,
+                      );
+                      break;
+                  }
                 }
-              }
 
-              return AnimatedSwitcher(
-                duration: const Duration(milliseconds: 200),
-                child: content,
-              );
-            },
-          ),
+                return AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 200),
+                  child: content,
+                );
+              },
+            ),
 
-          Positioned.fill(
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
-                  widget.onClickGridItem();
-                },
+            Positioned.fill(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {
+                    widget.onClickGridItem();
+                  },
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

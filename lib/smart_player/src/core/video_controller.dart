@@ -68,7 +68,7 @@ class VideoController extends VideoControls {
       if (loadId != _currentLoadId) return;
 
       // 2. Seek to saved position if needed
-      if (info.lastWatchedStatus == LastWatchedState.save &&
+      if (info.lastWatchedState == LastWatchedState.save &&
           info.savedPosition > Duration.zero) {
         await _playerController.seekTo(info.savedPosition);
       }

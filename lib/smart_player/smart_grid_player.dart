@@ -3,48 +3,54 @@ import 'package:renter_tree_test/smart_player/src/widgets/smart_video_player_gri
 import 'smart_import.dart';
 
 class SmartGridPlayer extends StatelessWidget {
-  final String videoUrl;
-  final String debugLabelText;
-  final String thumbnailUrl;
   final double height;
   final double width;
-  final LastWatchedState lastWatchedStatus;
+  final String debugLabelText;
+  final String thumbnailUrl;
+  final String videoUrl;
   final bool? isAsset;
-  final bool looping;
-  final Color seekBarColor;
+  final LastWatchedState? lastWatchedState;
+  final bool? looping;
+  final bool? showProgressBar;
+  final bool? showProgressDuration;
   final VoidCallback onClickGridItem;
   final Function? onError;
+  final BorderRadiusGeometry? borderRadius;
 
   const SmartGridPlayer({
     required Key key,
-    required this.videoUrl,
-    required this.debugLabelText,
-    required this.thumbnailUrl,
     required this.height,
     required this.width,
-    this.lastWatchedStatus = LastWatchedState.forgot,
-    this.looping = false,
+    required this.debugLabelText,
+    required this.thumbnailUrl,
+    required this.videoUrl,
     this.isAsset,
-    this.seekBarColor = Colors.redAccent,
+    this.lastWatchedState,
+    this.looping,
+    this.showProgressBar,
+    this.showProgressDuration,
     required this.onClickGridItem,
-    this.onError
+    this.onError,
+    this.borderRadius
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SmartVideoPlayerGridWidget(
       key: key!,
-      videoUrl: videoUrl,
-      debugLabelText: debugLabelText,
-      thumbnailUrl: thumbnailUrl,
       height: height,
       width: width,
-      lastWatchedStatus: lastWatchedStatus,
+      debugLabelText: debugLabelText,
+      thumbnailUrl: thumbnailUrl,
+      videoUrl: videoUrl,
       isAsset: isAsset,
+      lastWatchedState: lastWatchedState,
       looping: looping,
-      seekBarColor: seekBarColor,
+      showProgressBar: showProgressBar,
+      showProgressDuration: showProgressDuration,
       onClickGridItem: onClickGridItem,
       onError: onError,
+      borderRadius: borderRadius
     );
   }
 }

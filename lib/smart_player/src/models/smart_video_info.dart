@@ -7,7 +7,7 @@ class SmartVideoInfo {
   final String debugLabelText;
   final String? thumbnailUrl;
   final PlayMode playMode;
-  final LastWatchedState lastWatchedStatus;
+  final LastWatchedState lastWatchedState;
   final bool? isAsset;
   final bool looping;
   Duration savedPosition = Duration.zero;
@@ -19,7 +19,7 @@ class SmartVideoInfo {
     required this.debugLabelText,
     this.thumbnailUrl,
     this.playMode = PlayMode.auto,
-    this.lastWatchedStatus = LastWatchedState.forgot,
+    this.lastWatchedState = LastWatchedState.forgot,
     this.isAsset,
     this.looping = false,
     this.savedPosition = Duration.zero,

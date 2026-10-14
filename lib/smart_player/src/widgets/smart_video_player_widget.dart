@@ -53,7 +53,7 @@ class _SmartVideoPlayerWidgetState extends State<SmartVideoPlayerWidget> {
       debugLabelText: widget.debugLabelText,
       thumbnailUrl: widget.thumbnailUrl,
       playMode: widget.playMode,
-      lastWatchedStatus: widget.lastWatchedStatus,
+      lastWatchedState: widget.lastWatchedStatus,
       isAsset: widget.isAsset,
       looping: widget.looping,
     );

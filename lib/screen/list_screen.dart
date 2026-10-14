@@ -15,6 +15,7 @@ class ListScreenState extends State<ListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
+        padding: EdgeInsets.all(8.0),
         itemCount: ImageUrls.landscapeListImages.length,
         itemBuilder: (context, index) {
           final itemKey = ValueKey("list_screen_$index");
@@ -27,12 +28,13 @@ class ListScreenState extends State<ListScreen> {
                 duration: const Duration(milliseconds: 200),
                 child: SmartListPlayer(
                   key: itemKey,
+                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
                   videoUrl: VideoUrls.landscapeVideo,
                   thumbnailUrl: ImageUrls.landscapeListImages[index],
                   debugLabelText: 'Video $index',
                   height: 240,
                   width: double.infinity,
-                  lastWatchedStatus: LastWatchedState.save,
+                  lastWatchedState: LastWatchedState.save,
                   looping: false,
                   showProgressBar: true,
                   showProgressDuration: true,

@@ -49,7 +49,7 @@ class GridScreenState extends State<GridScreen> {
                   debugLabelText: 'Video $index',
                   height: c.maxHeight,
                   width: c.maxWidth,
-                  lastWatchedStatus: LastWatchedState.save,
+                  lastWatchedState: LastWatchedState.save,
                   looping: false,
                   onClickGridItem: () {
                     debugPrint('Tapped on Video $index');

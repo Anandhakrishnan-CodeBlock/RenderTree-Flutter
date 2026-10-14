@@ -30,7 +30,7 @@ class TabViewTwo extends StatelessWidget {
                   debugLabelText: 'Video $index',
                   height: 240,
                   width: double.infinity,
-                  lastWatchedStatus: LastWatchedState.save,
+                  lastWatchedState: LastWatchedState.save,
                   looping: false,
                   showProgressBar: true,
                   showProgressDuration: true,
