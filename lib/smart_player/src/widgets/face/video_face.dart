@@ -9,18 +9,20 @@ class VideoFace extends StatefulWidget {
   final VideoPlayerController controller;
   final PlayMode playMode;
   final PlayerVariant variant;
-  final Color seekBarColor;
-  final bool showProgressBar;
-  final bool showProgressDuration;
+  final MuteConfig? muteConfig;
+  final DurationConfig? durationConfig;
+  final SeekBarConfig? seekBarConfig;
+  final VideoConfig? videoConfig;
 
   const VideoFace({
     super.key,
     required this.controller,
     required this.playMode,
     required this.variant,
-    required this.seekBarColor,
-    required this.showProgressBar,
-    required this.showProgressDuration
+    this.muteConfig,
+    this.durationConfig,
+    this.seekBarConfig,
+    this.videoConfig = const VideoConfig()
   });
 
   @override
@@ -53,59 +55,71 @@ class VideoFaceState extends State<VideoFace> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        SizedBox(
-          width: width,
-          height: height,
-          child: ValueListenableBuilder<VideoPlayerValue>(
-            valueListenable: widget.controller,
-            builder: (context, value, child) {
-              return Stack(
-                alignment: Alignment.center,
-                children: [
-                  child!,
-                  if (value.isBuffering)
-                    const CircularProgressIndicator(color: Colors.white),
-                ],
-              );
-            },
-            child: PaintListenerWidget(
-              onPaintStateChanged: (isPainting) {
-                if (!isPainting) {
-                  _resetTimer(widget.controller);
-                }
+    final config = widget.videoConfig ?? const VideoConfig();
+    return Container(
+      color: config.backgroundColor,
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          SizedBox(
+            width: width,
+            height: height,
+            child: ValueListenableBuilder<VideoPlayerValue>(
+              valueListenable: widget.controller,
+              builder: (context, value, child) {
+                return Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    child!,
+                    if (value.isBuffering)
+                       CircularProgressIndicator(
+                          color: config.bufferingIndicatorColor,
+                          strokeWidth: config.bufferingIndicatorWidth,
+                      ),
+                  ],
+                );
               },
-              child: VideoPlayer(widget.controller),
+              child: PaintListenerWidget(
+                onPaintStateChanged: (isPainting) {
+                  if (!isPainting) {
+                    _resetTimer(widget.controller);
+                  }
+                },
+                child: AspectRatio(
+                    aspectRatio: widget.controller.value.aspectRatio,
+                    child: VideoPlayer(widget.controller)),
+              ),
             ),
           ),
-        ),
-        if (widget.variant != PlayerVariant.detail)
-          ListOverlay(
-            videoController: widget.controller,
-            controlsVisible: _controlsVisible,
-            seekBarColor: widget.seekBarColor,
-            showProgressBar: widget.showProgressBar,
-            showProgressDuration: widget.showProgressDuration,
-          )
-        else
-          DetailOverlay(
-            videoController: widget.controller,
-            controlsVisible: _controlsVisible,
-            seekBarColor: widget.seekBarColor,
-            showProgressBar: widget.showProgressBar,
-            showProgressDuration: widget.showProgressDuration,
-            openFullscreen: () {
-              _openFullscreen(widget.controller);
-            },
-            toggleControls: () {
-              _toggleControls();
-            },
-            togglePlayPause: () {
-              _togglePlayPause(widget.controller);
-            },
-          ),
-      ],
+          if (widget.variant != PlayerVariant.detail)
+            ListOverlay(
+              videoController: widget.controller,
+              controlsVisible: _controlsVisible,
+              muteConfig: widget.muteConfig,
+              durationConfig: widget.durationConfig,
+              seekBarConfig: widget.seekBarConfig,
+              videoConfig: config,
+            )
+          else
+            DetailOverlay(
+              videoController: widget.controller,
+              controlsVisible: _controlsVisible,
+              muteConfig: widget.muteConfig,
+              durationConfig: widget.durationConfig,
+              seekBarConfig: widget.seekBarConfig,
+              videoConfig: config,
+              openFullscreen: () {
+                _openFullscreen(widget.controller);
+              },
+              toggleControls: () {
+                _toggleControls();
+              },
+              togglePlayPause: () {
+                _togglePlayPause(widget.controller);
+              },
+            ),
+        ],
+      ),
     );
   }
 
@@ -143,7 +157,10 @@ class VideoFaceState extends State<VideoFace> {
       MaterialPageRoute(
         builder: (_) => FullScreenVideoPage(
           controller: controller,
-          seekBarColor: widget.seekBarColor,
+          muteConfig: widget.muteConfig,
+          durationConfig: widget.durationConfig,
+          seekBarConfig: widget.seekBarConfig,
+          videoConfig: widget.videoConfig,
         ),
       ),
     );

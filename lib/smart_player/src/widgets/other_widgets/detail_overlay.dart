@@ -6,27 +6,30 @@ import '../../../smart_import.dart';
 class DetailOverlay extends StatelessWidget {
   final VideoPlayerController videoController;
   final bool controlsVisible;
-  final Color seekBarColor;
   final VoidCallback toggleControls;
   final VoidCallback openFullscreen;
   final VoidCallback togglePlayPause;
-  final bool showProgressBar;
-  final bool showProgressDuration;
+  final MuteConfig? muteConfig;
+  final DurationConfig? durationConfig;
+  final SeekBarConfig? seekBarConfig;
+  final VideoConfig? videoConfig;
 
   const DetailOverlay({
     super.key,
     required this.videoController,
     required this.controlsVisible,
-    required this.seekBarColor,
     required this.toggleControls,
     required this.openFullscreen,
     required this.togglePlayPause,
-    required this.showProgressBar,
-    required this.showProgressDuration
+    this.muteConfig,
+    this.durationConfig,
+    this.seekBarConfig,
+    this.videoConfig = const VideoConfig(),
   });
 
   @override
   Widget build(BuildContext context) {
+    final config = videoConfig ?? const VideoConfig();
     return Positioned.fill(
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -44,7 +47,10 @@ class DetailOverlay extends StatelessWidget {
                 children: [
                   Align(
                     alignment: AlignmentGeometry.topRight,
-                      child: MuteToggleButton(controller: videoController)
+                    child: MuteToggleButton(
+                      controller: videoController,
+                      muteConfig: muteConfig,
+                    ),
                   ),
                   const Spacer(),
                   ValueListenableBuilder<VideoPlayerValue>(
@@ -52,12 +58,9 @@ class DetailOverlay extends StatelessWidget {
                     builder: (context, value, _) {
                       return IconButton(
                         iconSize: 56,
-                        icon: Icon(
-                          value.isPlaying
-                              ? Icons.pause_circle_filled
-                              : Icons.play_circle_fill,
-                          color: Colors.white,
-                        ),
+                        icon: value.isPlaying
+                            ? config.pauseIcon
+                            : config.playIcon,
                         onPressed: () => togglePlayPause(),
                       );
                     },
@@ -72,29 +75,21 @@ class DetailOverlay extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              Visibility(
-                                visible: showProgressDuration,
-                                child: DurationBadge(
-                                  position: value.position,
-                                  duration: value.duration,
-                                ),
+                              DurationBadge(
+                                position: value.position,
+                                duration: value.duration,
+                                durationConfig: durationConfig,
                               ),
                               Spacer(),
                               IconButton(
-                                icon: const Icon(
-                                  Icons.fullscreen,
-                                  color: Colors.white,
-                                ),
+                                icon: config.maximizeIcon,
                                 onPressed: () => openFullscreen(),
                               ),
                             ],
                           ),
-                          Visibility(
-                            visible: showProgressBar,
-                            child: SeekBar(
-                              controller: videoController,
-                              color: seekBarColor,
-                            ),
+                          SeekBar(
+                            controller: videoController,
+                            seekBarConfig: seekBarConfig,
                           ),
                         ],
                       );

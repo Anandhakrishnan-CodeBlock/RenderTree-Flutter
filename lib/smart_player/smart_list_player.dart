@@ -11,11 +11,14 @@ class SmartListPlayer extends StatelessWidget {
   final bool? isAsset;
   final LastWatchedState? lastWatchedState;
   final bool? looping;
-  final bool? showProgressBar;
-  final bool? showProgressDuration;
   final VoidCallback onClickListItem;
-  final Function? onError;
+  final Function? onVideoError;
+  final Function? onImageError;
   final BorderRadiusGeometry? borderRadius;
+  final MuteConfig? muteConfig;
+  final DurationConfig? durationConfig;
+  final SeekBarConfig? seekBarConfig;
+  final VideoConfig? videoConfig;
 
   const SmartListPlayer({
     required Key key,
@@ -27,11 +30,14 @@ class SmartListPlayer extends StatelessWidget {
     this.isAsset,
     this.lastWatchedState,
     this.looping,
-    this.showProgressBar,
-    this.showProgressDuration,
     required this.onClickListItem,
-    this.onError,
-    this.borderRadius
+    this.onVideoError,
+    this.onImageError,
+    this.borderRadius,
+    this.muteConfig,
+    this.durationConfig,
+    this.seekBarConfig,
+    this.videoConfig
   }) : super(key: key);
 
   @override
@@ -46,11 +52,14 @@ class SmartListPlayer extends StatelessWidget {
       isAsset: isAsset,
       lastWatchedState: lastWatchedState,
       looping: looping,
-      showProgressBar: showProgressBar,
-      showProgressDuration: showProgressDuration,
       onClickListItem: onClickListItem,
-      onError: onError,
-      borderRadius: borderRadius
+      onVideoError: onVideoError,
+      onImageError: onImageError,
+      borderRadius: borderRadius,
+      muteConfig: muteConfig,
+      durationConfig: durationConfig,
+      seekBarConfig: seekBarConfig,
+      videoConfig: videoConfig
     );
   }
 }

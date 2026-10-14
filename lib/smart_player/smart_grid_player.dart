@@ -11,11 +11,15 @@ class SmartGridPlayer extends StatelessWidget {
   final bool? isAsset;
   final LastWatchedState? lastWatchedState;
   final bool? looping;
-  final bool? showProgressBar;
-  final bool? showProgressDuration;
   final VoidCallback onClickGridItem;
-  final Function? onError;
+  final Function? onVideoError;
+  final Function? onImageError;
   final BorderRadiusGeometry? borderRadius;
+  final MuteConfig? muteConfig;
+  final DurationConfig? durationConfig;
+  final SeekBarConfig? seekBarConfig;
+  final VideoConfig? videoConfig;
+
 
   const SmartGridPlayer({
     required Key key,
@@ -27,11 +31,14 @@ class SmartGridPlayer extends StatelessWidget {
     this.isAsset,
     this.lastWatchedState,
     this.looping,
-    this.showProgressBar,
-    this.showProgressDuration,
     required this.onClickGridItem,
-    this.onError,
-    this.borderRadius
+    this.onVideoError,
+    this.onImageError,
+    this.borderRadius,
+    this.muteConfig,
+    this.durationConfig,
+    this.seekBarConfig,
+    this.videoConfig
   }) : super(key: key);
 
   @override
@@ -46,11 +53,14 @@ class SmartGridPlayer extends StatelessWidget {
       isAsset: isAsset,
       lastWatchedState: lastWatchedState,
       looping: looping,
-      showProgressBar: showProgressBar,
-      showProgressDuration: showProgressDuration,
       onClickGridItem: onClickGridItem,
-      onError: onError,
-      borderRadius: borderRadius
+      onVideoError: onVideoError,
+      onImageError: onImageError,
+      borderRadius: borderRadius,
+      muteConfig: muteConfig,
+      durationConfig: durationConfig,
+      seekBarConfig: seekBarConfig,
+      videoConfig: videoConfig
     );
   }
 }

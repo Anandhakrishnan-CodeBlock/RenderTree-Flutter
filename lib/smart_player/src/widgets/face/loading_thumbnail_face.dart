@@ -6,12 +6,14 @@ class LoadingThumbnailFace extends StatelessWidget {
   final double width;
   final double height;
   final String? thumbnailUrl;
+  final Function? onImageError;
 
   const LoadingThumbnailFace({
     super.key,
     required this.width,
     required this.height,
     this.thumbnailUrl,
+    this.onImageError
   });
 
   @override
@@ -21,6 +23,7 @@ class LoadingThumbnailFace extends StatelessWidget {
             width: width,
             height: height,
             thumbnailUrl: thumbnailUrl!,
+            onImageError: onImageError,
           )
         : LoadingFace(
             width: width,

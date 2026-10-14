@@ -6,17 +6,19 @@ import '../../../smart_import.dart';
 class ListOverlay extends StatelessWidget {
   final VideoPlayerController videoController;
   final bool controlsVisible;
-  final Color seekBarColor;
-  final bool showProgressBar;
-  final bool showProgressDuration;
+  final MuteConfig? muteConfig;
+  final DurationConfig? durationConfig;
+  final SeekBarConfig? seekBarConfig;
+  final VideoConfig? videoConfig;
 
   const ListOverlay({
     super.key,
     required this.videoController,
     required this.controlsVisible,
-    required this.seekBarColor,
-    required this.showProgressBar,
-    required this.showProgressDuration
+    this.muteConfig,
+    this.durationConfig,
+    this.seekBarConfig,
+    this.videoConfig = const VideoConfig()
   });
 
   @override
@@ -27,7 +29,10 @@ class ListOverlay extends StatelessWidget {
         child: Column(
           crossAxisAlignment: .end,
           children: [
-            MuteToggleButton(controller: videoController),
+            MuteToggleButton(
+                controller: videoController,
+                muteConfig: muteConfig,
+            ),
             const Spacer(),
             ValueListenableBuilder<VideoPlayerValue>(
               valueListenable: videoController,
@@ -36,20 +41,14 @@ class ListOverlay extends StatelessWidget {
                   crossAxisAlignment: .end,
                   mainAxisSize: .min,
                   children: [
-                    Visibility(
-                      visible: showProgressDuration,
-                      child: DurationBadge(
-                        position: value.position,
-                        duration: value.duration,
-                      ),
+                    DurationBadge(
+                      position: value.position,
+                      duration: value.duration,
+                      durationConfig: durationConfig,
                     ),
-                    Visibility(
-                      visible: showProgressBar,
-                      child: SeekBar(
-                        controller: videoController,
-                        color: seekBarColor,
-                        compact: true,
-                      ),
+                    SeekBar(
+                      controller: videoController,
+                      seekBarConfig: seekBarConfig,
                     ),
                   ],
                 );

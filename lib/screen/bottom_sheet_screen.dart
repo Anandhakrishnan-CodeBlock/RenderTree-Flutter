@@ -22,12 +22,10 @@ class BottomSheetScreen extends StatelessWidget {
             width: double.infinity,
             thumbnailUrl: ImageUrls.landscapeImages[9],
             playMode: PlayMode.auto,
-            lastWatchedStatus: LastWatchedState.save,
+            lastWatchedState: LastWatchedState.save,
             isAsset: false,
             looping: true,
-            showProgressBar: true,
-            showProgressDuration: true,
-            height: 250
+            height: 250,
           ),
           SizedBox(height: 35),
           ElevatedButton(
@@ -64,11 +62,9 @@ class BottomSheetScreen extends StatelessWidget {
                 width: double.infinity,
                 thumbnailUrl: ImageUrls.landscapeImages[29],
                 playMode: PlayMode.auto,
-                lastWatchedStatus: LastWatchedState.save,
+                lastWatchedState: LastWatchedState.save,
                 isAsset: false,
                 looping: true,
-                showProgressBar: true,
-                showProgressDuration: true,
                 height: 250
               ),
               const SizedBox(height: 24),

@@ -6,12 +6,14 @@ final class ThumbnailImage extends StatelessWidget {
   final double width;
   final double height;
   final String thumbnailUrl;
+  final Function? onImageError;
 
   const ThumbnailImage({
     super.key,
     required this.width,
     required this.height,
     required this.thumbnailUrl,
+    this.onImageError,
   });
 
   @override
@@ -34,6 +36,7 @@ final class ThumbnailImage extends StatelessWidget {
         );
       },
       errorBuilder: (context, error, stackTrace) {
+        onImageError?.call(error);
         return Padding(
           padding: const EdgeInsets.all(16),
           child: Center(

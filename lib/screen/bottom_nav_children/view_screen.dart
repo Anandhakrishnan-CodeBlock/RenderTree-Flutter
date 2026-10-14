@@ -34,11 +34,9 @@ class ViewScreenState extends State<ViewScreen> {
             width: double.infinity,
             thumbnailUrl: widget.thumbnailUrl,
             playMode: PlayMode.auto,
-            lastWatchedStatus: LastWatchedState.save,
+            lastWatchedState: LastWatchedState.save,
             isAsset: false,
             looping: true,
-            showProgressBar: true,
-            showProgressDuration: true,
             height: 250
           ),
         ],

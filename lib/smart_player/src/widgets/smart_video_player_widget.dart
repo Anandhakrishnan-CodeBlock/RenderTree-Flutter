@@ -5,33 +5,41 @@ import 'package:flutter/scheduler.dart';
 import '../../smart_import.dart';
 
 class SmartVideoPlayerWidget extends StatefulWidget {
-  final String videoUrl;
-  final String debugLabelText;
-  final String? thumbnailUrl;
   final double height;
   final double width;
-  final PlayMode playMode;
-  final LastWatchedState lastWatchedStatus;
+  final String debugLabelText;
+  final String thumbnailUrl;
+  final String videoUrl;
   final bool? isAsset;
-  final bool looping;
-  final Color seekBarColor;
-  final bool? showProgressBar;
-  final bool? showProgressDuration;
+  final PlayMode? playMode;
+  final LastWatchedState? lastWatchedState;
+  final bool? looping;
+  final Function? onVideoError;
+  final Function? onImageError;
+  final BorderRadiusGeometry? borderRadius;
+  final MuteConfig? muteConfig;
+  final DurationConfig? durationConfig;
+  final SeekBarConfig? seekBarConfig;
+  final VideoConfig? videoConfig;
 
   const SmartVideoPlayerWidget({
     required Key key,
-    required this.videoUrl,
-    required this.debugLabelText,
-    this.thumbnailUrl,
     required this.height,
     required this.width,
-    this.playMode = PlayMode.auto,
-    this.lastWatchedStatus = LastWatchedState.forgot,
-    this.looping = false,
+    required this.debugLabelText,
+    required this.thumbnailUrl,
+    required this.videoUrl,
     this.isAsset,
-    this.seekBarColor = Colors.redAccent,
-    this.showProgressBar = false,
-    this.showProgressDuration = false
+    this.playMode,
+    this.lastWatchedState,
+    this.looping,
+    this.onVideoError,
+    this.onImageError,
+    this.borderRadius,
+    this.muteConfig,
+    this.durationConfig,
+    this.seekBarConfig,
+    this.videoConfig
   }) : super(key: key);
 
   @override
@@ -45,6 +53,12 @@ class _SmartVideoPlayerWidgetState extends State<SmartVideoPlayerWidget> {
   bool _activationScheduled = false;
 
   PlayerVariant variant = PlayerVariant.detail;
+  PlayMode playMode = PlayMode.auto;
+  late BorderRadiusGeometry borderRadius = widget.borderRadius ?? BorderRadiusGeometry.zero;
+  late LastWatchedState lastWatchedState = widget.lastWatchedState ?? LastWatchedState.forgot;
+  late bool isAsset = widget.isAsset ?? false;
+  late bool looping = widget.looping ?? false;
+
   @override
   void initState() {
     smartVideoInfo = SmartVideoInfo(
@@ -52,10 +66,10 @@ class _SmartVideoPlayerWidgetState extends State<SmartVideoPlayerWidget> {
       videoUrl: widget.videoUrl,
       debugLabelText: widget.debugLabelText,
       thumbnailUrl: widget.thumbnailUrl,
-      playMode: widget.playMode,
-      lastWatchedState: widget.lastWatchedStatus,
-      isAsset: widget.isAsset,
-      looping: widget.looping,
+      playMode: playMode,
+      lastWatchedState: lastWatchedState,
+      isAsset: isAsset,
+      looping: looping,
     );
     _videoStream = smartManager.selectedVideo;
 
@@ -99,6 +113,7 @@ class _SmartVideoPlayerWidgetState extends State<SmartVideoPlayerWidget> {
                 width: widget.width,
                 height: widget.height,
                 thumbnailUrl: widget.thumbnailUrl,
+                onImageError: widget.onImageError,
               );
             } else {
               switch (event!.status) {
@@ -107,6 +122,7 @@ class _SmartVideoPlayerWidgetState extends State<SmartVideoPlayerWidget> {
                     width: widget.width,
                     height: widget.height,
                     thumbnailUrl: widget.thumbnailUrl,
+                    onImageError: widget.onImageError,
                   );
                   break;
                 case PlayerEventStatus.failed:
@@ -115,11 +131,12 @@ class _SmartVideoPlayerWidgetState extends State<SmartVideoPlayerWidget> {
                 case PlayerEventStatus.ready:
                   content = VideoFace(
                     controller: event.controller!,
-                    playMode: widget.playMode,
+                    playMode: playMode,
                     variant: variant,
-                    seekBarColor: widget.seekBarColor,
-                    showProgressBar: widget.showProgressBar ?? false,
-                    showProgressDuration: widget.showProgressDuration ?? false,
+                    muteConfig: widget.muteConfig,
+                    durationConfig: widget.durationConfig,
+                    seekBarConfig: widget.seekBarConfig,
+                    videoConfig: widget.videoConfig,
                   );
                   break;
               }

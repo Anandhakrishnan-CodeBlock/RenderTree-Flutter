@@ -36,8 +36,6 @@ class ListScreenState extends State<ListScreen> {
                   width: double.infinity,
                   lastWatchedState: LastWatchedState.save,
                   looping: false,
-                  showProgressBar: true,
-                  showProgressDuration: true,
                   onClickListItem: () {
                     debugPrint('Tapped on Video $index');
                   },

@@ -8,12 +8,18 @@ import '../../../smart_import.dart';
 
 class FullScreenVideoPage extends StatefulWidget {
   final VideoPlayerController controller;
-  final Color seekBarColor;
+  final MuteConfig? muteConfig;
+  final DurationConfig? durationConfig;
+  final SeekBarConfig? seekBarConfig;
+  final VideoConfig? videoConfig;
 
   const FullScreenVideoPage({
     super.key,
     required this.controller,
-    required this.seekBarColor,
+    this.muteConfig,
+    this.durationConfig,
+    this.seekBarConfig,
+    this.videoConfig = const VideoConfig()
   });
 
   @override
@@ -68,6 +74,7 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
   @override
   Widget build(BuildContext context) {
     final controller = widget.controller;
+    final config = widget.videoConfig ?? const VideoConfig();
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
@@ -95,6 +102,7 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
                                 alignment: Alignment.topRight,
                                 child: MuteToggleButton(
                                   controller: controller,
+                                  muteConfig: widget.muteConfig
                                 ),
                               ),
                               const Spacer(),
@@ -103,12 +111,9 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
                                 builder: (context, value, _) {
                                   return IconButton(
                                     iconSize: 64,
-                                    icon: Icon(
-                                      value.isPlaying
-                                          ? Icons.pause_circle_filled
-                                          : Icons.play_circle_fill,
-                                      color: Colors.white,
-                                    ),
+                                    icon: value.isPlaying
+                                        ? config.pauseIcon
+                                        : config.playIcon,
                                     onPressed: _togglePlayPause,
                                   );
                                 },
@@ -124,22 +129,20 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
                                       DurationBadge(
                                         position: value.position,
                                         duration: value.duration,
+                                        durationConfig: widget.durationConfig
                                       ),
                                       Row(
                                         children: [
                                           Expanded(
                                             child: SeekBar(
                                               controller: controller,
-                                              color: widget.seekBarColor,
+                                              seekBarConfig: widget.seekBarConfig,
                                             ),
                                           ),
                                           SizedBox(width: 4.0),
                                           IconButton(
                                             padding: EdgeInsets.all(4.0),
-                                            icon: const Icon(
-                                              Icons.fullscreen_exit,
-                                              color: Colors.white,
-                                            ),
+                                            icon: config.minimizeIcon,
                                             onPressed: () =>
                                                 Navigator.of(context).pop(),
                                           ),

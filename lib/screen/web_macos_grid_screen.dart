@@ -24,7 +24,7 @@ class WebMacosGridState extends State<WebMacosGridScreen> {
           childAspectRatio: 16 / 9
         ),
         itemBuilder: (context, index) {
-          final itemKey = ValueKey("grid_screen_$index");
+          final itemKey = ValueKey("grid_screen_web_mac_$index");
           return LayoutBuilder(
             builder: (context, c) {
               return SmartWebMacosGridPlayer(
@@ -37,7 +37,7 @@ class WebMacosGridState extends State<WebMacosGridScreen> {
                 onClickGridItem: () {
                   debugPrint('Tapped on Video $index');
                 },
-                onError: (error) {
+                onVideoError: (error) {
                   debugPrint('Error: $error');
                 },
               );

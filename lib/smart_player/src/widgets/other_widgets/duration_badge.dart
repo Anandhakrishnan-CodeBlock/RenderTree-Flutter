@@ -1,33 +1,36 @@
 import 'package:flutter/material.dart';
 
+import '../../../smart_import.dart';
+
 final class DurationBadge extends StatelessWidget {
   final Duration position;
   final Duration duration;
-  final bool compact;
+  final DurationConfig? durationConfig;
 
   const DurationBadge({
     super.key,
     required this.position,
     required this.duration,
-    this.compact = false
+    this.durationConfig = const DurationConfig(),
   });
 
   @override
   Widget build(BuildContext context) {
+    final config = durationConfig ?? const DurationConfig();
+    if (!config.showDuration) {
+      return const SizedBox.shrink();
+    }
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: compact ? 6 : 8,
-        vertical: compact ? 2 : 4,
-      ),
+      padding: config.padding,
       decoration: BoxDecoration(
-        color: Colors.black45,
-        borderRadius: BorderRadius.circular(6),
+        color: config.backgroundColor,
+        borderRadius: config.backgroundRadius,
       ),
       child: Text(
         '${_formatDuration(position)} / ${_formatDuration(duration)}',
         style: TextStyle(
-          color: Colors.white,
-          fontSize: compact ? 11 : 12,
+          color: config.textColor,
+          fontSize: config.textSize,
         ),
       ),
     );

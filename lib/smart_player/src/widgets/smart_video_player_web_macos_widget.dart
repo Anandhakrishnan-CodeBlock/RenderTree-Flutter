@@ -12,11 +12,14 @@ class SmartVideoPlayerGridWebMacosWidget extends StatefulWidget {
   final bool? isAsset;
   final LastWatchedState? lastWatchedState;
   final bool? looping;
-  final bool? showProgressBar;
-  final bool? showProgressDuration;
   final VoidCallback onClickGridItem;
-  final Function? onError;
+  final Function? onVideoError;
+  final Function? onImageError;
   final BorderRadiusGeometry? borderRadius;
+  final MuteConfig? muteConfig;
+  final DurationConfig? durationConfig;
+  final SeekBarConfig? seekBarConfig;
+  final VideoConfig? videoConfig;
 
   const SmartVideoPlayerGridWebMacosWidget({
     required Key key,
@@ -28,11 +31,14 @@ class SmartVideoPlayerGridWebMacosWidget extends StatefulWidget {
     this.isAsset,
     this.lastWatchedState,
     this.looping,
-    this.showProgressBar,
-    this.showProgressDuration,
     required this.onClickGridItem,
-    this.onError,
-    this.borderRadius
+    this.onVideoError,
+    this.onImageError,
+    this.borderRadius,
+    this.muteConfig,
+    this.durationConfig,
+    this.seekBarConfig,
+    this.videoConfig
   }) : super(key: key);
 
   @override
@@ -51,8 +57,6 @@ class _SmartVideoPlayerGridWebMacosWidgetState extends State<SmartVideoPlayerGri
   late LastWatchedState lastWatchedState = widget.lastWatchedState ?? LastWatchedState.forgot;
   late bool isAsset = widget.isAsset ?? false;
   late bool looping = widget.looping ?? false;
-  late bool showProgressBar = widget.showProgressBar ?? false;
-  late bool showProgressDuration = widget.showProgressDuration ?? false;
 
   @override
   void initState() {
@@ -107,6 +111,7 @@ class _SmartVideoPlayerGridWebMacosWidgetState extends State<SmartVideoPlayerGri
                       width: widget.width,
                       height: widget.height,
                       thumbnailUrl: widget.thumbnailUrl,
+                      onImageError: widget.onImageError
                     );
                   } else {
                     switch (event!.status) {
@@ -115,20 +120,22 @@ class _SmartVideoPlayerGridWebMacosWidgetState extends State<SmartVideoPlayerGri
                           width: widget.width,
                           height: widget.height,
                           thumbnailUrl: widget.thumbnailUrl,
+                          onImageError: widget.onImageError
                         );
                         break;
                       case PlayerEventStatus.failed:
                         content = const ErrorFace(text: 'Failed to load video');
-                        widget.onError?.call(event.error);
+                        widget.onVideoError?.call(event.error);
                         break;
                       case PlayerEventStatus.ready:
                         content = VideoFace(
                           controller: event.controller!,
                           playMode: playMode,
                           variant: variant,
-                          seekBarColor: Colors.redAccent,
-                          showProgressBar: showProgressBar,
-                          showProgressDuration: showProgressDuration,
+                          muteConfig: widget.muteConfig,
+                          durationConfig: widget.durationConfig,
+                          seekBarConfig: widget.seekBarConfig,
+                          videoConfig: widget.videoConfig
                         );
                         break;
                     }

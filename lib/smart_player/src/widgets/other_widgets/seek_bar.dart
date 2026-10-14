@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../smart_import.dart';
+
 final class SeekBar extends StatefulWidget {
   final VideoPlayerController controller;
-  final Color color;
-  final bool compact;
+  final SeekBarConfig? seekBarConfig;
 
   const SeekBar({
     super.key,
     required this.controller,
-    required this.color,
-    this.compact = false,
+    this.seekBarConfig = const SeekBarConfig(),
   });
 
   @override
@@ -23,6 +23,10 @@ class _SeekBarState extends State<SeekBar> {
 
   @override
   Widget build(BuildContext context) {
+    final config = widget.seekBarConfig ?? const SeekBarConfig();
+    if (!config.showSeekBar) {
+      return const SizedBox.shrink();
+    }
     return ValueListenableBuilder<VideoPlayerValue>(
       valueListenable: widget.controller,
       builder: (context, value, _) {
@@ -35,17 +39,13 @@ class _SeekBarState extends State<SeekBar> {
 
         return SliderTheme(
           data: SliderTheme.of(context).copyWith(
-            trackHeight: widget.compact ? 2 : 4,
-            thumbShape: RoundSliderThumbShape(
-              enabledThumbRadius: widget.compact ? 4 : 6,
-            ),
-            overlayShape: RoundSliderOverlayShape(
-              overlayRadius: widget.compact ? 8 : 14,
-            ),
-            activeTrackColor: widget.color,
-            thumbColor: widget.color,
-            inactiveTrackColor: Colors.white30,
-            padding: EdgeInsets.all(4.0)
+            trackHeight: config.trackHeight,
+            thumbShape: config.thumbShape,
+            overlayShape: config.overlayShape,
+            activeTrackColor: config.activeTrackColor,
+            thumbColor: config.thumbColor,
+            inactiveTrackColor: config.inactiveTrackColor,
+            padding: config.padding,
           ),
           child: Slider(
             min: 0,

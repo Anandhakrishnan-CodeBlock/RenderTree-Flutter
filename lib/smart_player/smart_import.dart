@@ -46,6 +46,10 @@ export 'src/widgets/other_widgets/list_overlay.dart';
 export 'src/widgets/other_widgets/mute_toggle_button.dart';
 export 'src/widgets/other_widgets/seek_bar.dart';
 
+export 'src/models/video_config.dart' show VideoConfig;
+export 'src/models/seek_bar_config.dart' show SeekBarConfig;
+export 'src/models/duration_config.dart' show DurationConfig;
+export 'src/models/mute_config.dart' show MuteConfig;
 export 'src/models/grid_config.dart' show GridConfig;
 export 'src/enums/play_mode.dart' show PlayMode;
 export 'src/enums/last_watched_status.dart' show LastWatchedState;
