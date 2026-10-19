@@ -19,7 +19,7 @@ class SmartGridPlayer extends StatelessWidget {
   final DurationConfig? durationConfig;
   final SeekBarConfig? seekBarConfig;
   final VideoConfig? videoConfig;
-
+  final LoadingIndicationConfig? loadingIndicationConfig;
 
   const SmartGridPlayer({
     required Key key,
@@ -38,7 +38,8 @@ class SmartGridPlayer extends StatelessWidget {
     this.muteConfig,
     this.durationConfig,
     this.seekBarConfig,
-    this.videoConfig
+    this.videoConfig,
+    this.loadingIndicationConfig
   }) : super(key: key);
 
   @override
@@ -60,7 +61,8 @@ class SmartGridPlayer extends StatelessWidget {
       muteConfig: muteConfig,
       durationConfig: durationConfig,
       seekBarConfig: seekBarConfig,
-      videoConfig: videoConfig
+      videoConfig: videoConfig,
+      loadingIndicationConfig: loadingIndicationConfig
     );
   }
 }

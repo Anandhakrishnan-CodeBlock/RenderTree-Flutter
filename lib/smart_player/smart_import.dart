@@ -46,6 +46,7 @@ export 'src/widgets/other_widgets/list_overlay.dart';
 export 'src/widgets/other_widgets/mute_toggle_button.dart';
 export 'src/widgets/other_widgets/seek_bar.dart';
 
+export 'src/models/loading_indication_config.dart' show LoadingIndicationConfig;
 export 'src/models/video_config.dart' show VideoConfig;
 export 'src/models/seek_bar_config.dart' show SeekBarConfig;
 export 'src/models/duration_config.dart' show DurationConfig;
@@ -56,6 +57,7 @@ export 'src/enums/last_watched_status.dart' show LastWatchedState;
 export 'src/enums/viewport_zone.dart' show ViewportZone;
 export 'src/enums/shimmer_direction.dart' show ShimmerDirection;
 export 'src/enums/player_variant.dart' show PlayerVariant;
+export 'src/enums/indicator_type.dart' show IndicatorType;
 
 export 'smart_player.dart' show SmartPlayer;
 export 'smart_list_player.dart' show SmartListPlayer;

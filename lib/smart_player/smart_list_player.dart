@@ -19,6 +19,7 @@ class SmartListPlayer extends StatelessWidget {
   final DurationConfig? durationConfig;
   final SeekBarConfig? seekBarConfig;
   final VideoConfig? videoConfig;
+  final LoadingIndicationConfig? loadingIndicationConfig;
 
   const SmartListPlayer({
     required Key key,
@@ -37,7 +38,8 @@ class SmartListPlayer extends StatelessWidget {
     this.muteConfig,
     this.durationConfig,
     this.seekBarConfig,
-    this.videoConfig
+    this.videoConfig,
+    this.loadingIndicationConfig
   }) : super(key: key);
 
   @override
@@ -59,7 +61,8 @@ class SmartListPlayer extends StatelessWidget {
       muteConfig: muteConfig,
       durationConfig: durationConfig,
       seekBarConfig: seekBarConfig,
-      videoConfig: videoConfig
+      videoConfig: videoConfig,
+      loadingIndicationConfig: loadingIndicationConfig
     );
   }
 }

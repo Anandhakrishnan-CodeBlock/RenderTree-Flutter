@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:renter_tree_test/smart_player/smart_player.dart';
-import 'package:renter_tree_test/smart_player/src/assets/image_urls.dart';
+import 'package:renter_tree_test/smart_player/smart_import.dart';
 import 'package:renter_tree_test/smart_player/src/assets/video_urls.dart';
-import 'package:renter_tree_test/smart_player/src/enums/last_watched_status.dart';
-import 'package:renter_tree_test/smart_player/src/enums/play_mode.dart';
 
 class BottomSheetScreen extends StatelessWidget {
   const BottomSheetScreen({super.key});
@@ -20,12 +17,18 @@ class BottomSheetScreen extends StatelessWidget {
             videoUrl: VideoUrls.landscapeVideo,
             debugLabelText: "bottom_sheet_1",
             width: double.infinity,
-            thumbnailUrl: ImageUrls.landscapeImages[9],
+            //thumbnailUrl: ImageUrls.landscapeImages[9],
             playMode: PlayMode.auto,
             lastWatchedState: LastWatchedState.save,
             isAsset: false,
             looping: true,
             height: 250,
+            loadingIndicationConfig: LoadingIndicationConfig(
+                indicatorType: IndicatorType.circularIndicator,
+                circularIndicatorColor: Colors.white,
+                circularIndicatorBackgroundColor: Colors.black,
+                circularIndicatorStrokeWidth: 5.0
+            ),
           ),
           SizedBox(height: 35),
           ElevatedButton(
@@ -60,7 +63,6 @@ class BottomSheetScreen extends StatelessWidget {
                 videoUrl: VideoUrls.landscapeVideo,
                 debugLabelText: "bottom_sheet_2",
                 width: double.infinity,
-                thumbnailUrl: ImageUrls.landscapeImages[29],
                 playMode: PlayMode.auto,
                 lastWatchedState: LastWatchedState.save,
                 isAsset: false,

@@ -5,7 +5,7 @@ class SmartPlayer extends StatelessWidget {
   final double height;
   final double width;
   final String debugLabelText;
-  final String thumbnailUrl;
+  final String? thumbnailUrl;
   final String videoUrl;
   final bool? isAsset;
   final PlayMode? playMode;
@@ -18,13 +18,14 @@ class SmartPlayer extends StatelessWidget {
   final DurationConfig? durationConfig;
   final SeekBarConfig? seekBarConfig;
   final VideoConfig? videoConfig;
+  final LoadingIndicationConfig? loadingIndicationConfig;
 
   const SmartPlayer({
     required Key key,
     required this.height,
     required this.width,
     required this.debugLabelText,
-    required this.thumbnailUrl,
+    this.thumbnailUrl,
     required this.videoUrl,
     this.isAsset,
     this.playMode,
@@ -36,7 +37,8 @@ class SmartPlayer extends StatelessWidget {
     this.muteConfig,
     this.durationConfig,
     this.seekBarConfig,
-    this.videoConfig
+    this.videoConfig,
+    this.loadingIndicationConfig
   }) : super(key: key);
 
   @override
@@ -58,7 +60,8 @@ class SmartPlayer extends StatelessWidget {
       muteConfig: muteConfig,
       durationConfig: durationConfig,
       seekBarConfig: seekBarConfig,
-      videoConfig: videoConfig
+      videoConfig: videoConfig,
+      loadingIndicationConfig: loadingIndicationConfig
     );
   }
 }

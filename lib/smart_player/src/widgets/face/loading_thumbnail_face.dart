@@ -7,13 +7,14 @@ class LoadingThumbnailFace extends StatelessWidget {
   final double height;
   final String? thumbnailUrl;
   final Function? onImageError;
-
+  final LoadingIndicationConfig? loadingIndicationConfig;
   const LoadingThumbnailFace({
     super.key,
     required this.width,
     required this.height,
     this.thumbnailUrl,
-    this.onImageError
+    this.onImageError,
+    this.loadingIndicationConfig = const LoadingIndicationConfig(),
   });
 
   @override
@@ -28,8 +29,7 @@ class LoadingThumbnailFace extends StatelessWidget {
         : LoadingFace(
             width: width,
             height: height,
-            baseColor: Colors.grey.shade300,
-            highlightColor: Colors.grey.shade100,
+            loadingIndicationConfig: loadingIndicationConfig,
             child: Container(),
           );
   }

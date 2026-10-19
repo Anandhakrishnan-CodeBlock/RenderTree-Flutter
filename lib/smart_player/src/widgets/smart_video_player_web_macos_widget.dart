@@ -20,6 +20,7 @@ class SmartVideoPlayerGridWebMacosWidget extends StatefulWidget {
   final DurationConfig? durationConfig;
   final SeekBarConfig? seekBarConfig;
   final VideoConfig? videoConfig;
+  final LoadingIndicationConfig? loadingIndicationConfig;
 
   const SmartVideoPlayerGridWebMacosWidget({
     required Key key,
@@ -38,7 +39,8 @@ class SmartVideoPlayerGridWebMacosWidget extends StatefulWidget {
     this.muteConfig,
     this.durationConfig,
     this.seekBarConfig,
-    this.videoConfig
+    this.videoConfig,
+    this.loadingIndicationConfig
   }) : super(key: key);
 
   @override
@@ -111,7 +113,8 @@ class _SmartVideoPlayerGridWebMacosWidgetState extends State<SmartVideoPlayerGri
                       width: widget.width,
                       height: widget.height,
                       thumbnailUrl: widget.thumbnailUrl,
-                      onImageError: widget.onImageError
+                      onImageError: widget.onImageError,
+                      loadingIndicationConfig: widget.loadingIndicationConfig,
                     );
                   } else {
                     switch (event!.status) {
@@ -120,7 +123,8 @@ class _SmartVideoPlayerGridWebMacosWidgetState extends State<SmartVideoPlayerGri
                           width: widget.width,
                           height: widget.height,
                           thumbnailUrl: widget.thumbnailUrl,
-                          onImageError: widget.onImageError
+                          onImageError: widget.onImageError,
+                          loadingIndicationConfig: widget.loadingIndicationConfig,
                         );
                         break;
                       case PlayerEventStatus.failed:

@@ -20,6 +20,7 @@ class SmartVideoPlayerGridWidget extends StatefulWidget {
   final DurationConfig? durationConfig;
   final SeekBarConfig? seekBarConfig;
   final VideoConfig? videoConfig;
+  final LoadingIndicationConfig? loadingIndicationConfig;
 
   const SmartVideoPlayerGridWidget({
     required Key key,
@@ -39,6 +40,7 @@ class SmartVideoPlayerGridWidget extends StatefulWidget {
     this.durationConfig,
     this.seekBarConfig,
     this.videoConfig,
+    this.loadingIndicationConfig
   }) : super(key: key);
 
   @override
@@ -105,6 +107,7 @@ class _SmartVideoPlayerGridWidgetState extends State<SmartVideoPlayerGridWidget>
                     height: widget.height,
                     thumbnailUrl: widget.thumbnailUrl,
                     onImageError: widget.onImageError,
+                    loadingIndicationConfig: widget.loadingIndicationConfig,
                   );
                 } else {
                   switch (event!.status) {
@@ -114,6 +117,7 @@ class _SmartVideoPlayerGridWidgetState extends State<SmartVideoPlayerGridWidget>
                         height: widget.height,
                         thumbnailUrl: widget.thumbnailUrl,
                         onImageError: widget.onImageError,
+                        loadingIndicationConfig: widget.loadingIndicationConfig,
                       );
                       break;
                     case PlayerEventStatus.failed:

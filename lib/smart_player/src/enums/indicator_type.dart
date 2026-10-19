@@ -1,0 +1,1 @@
+enum IndicatorType { circularIndicator, shimmer }

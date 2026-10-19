@@ -7,6 +7,7 @@ final class ThumbnailImage extends StatelessWidget {
   final double height;
   final String thumbnailUrl;
   final Function? onImageError;
+  final LoadingIndicationConfig? loadingIndicationConfig;
 
   const ThumbnailImage({
     super.key,
@@ -14,6 +15,7 @@ final class ThumbnailImage extends StatelessWidget {
     required this.height,
     required this.thumbnailUrl,
     this.onImageError,
+    this.loadingIndicationConfig,
   });
 
   @override
@@ -30,8 +32,7 @@ final class ThumbnailImage extends StatelessWidget {
           key: key,
           width: width,
           height: height,
-          baseColor: Colors.grey.shade300,
-          highlightColor: Colors.grey.shade100,
+          loadingIndicationConfig: loadingIndicationConfig,
           child: Container(),
         );
       },

@@ -8,7 +8,7 @@ class SmartVideoPlayerWidget extends StatefulWidget {
   final double height;
   final double width;
   final String debugLabelText;
-  final String thumbnailUrl;
+  final String? thumbnailUrl;
   final String videoUrl;
   final bool? isAsset;
   final PlayMode? playMode;
@@ -21,13 +21,14 @@ class SmartVideoPlayerWidget extends StatefulWidget {
   final DurationConfig? durationConfig;
   final SeekBarConfig? seekBarConfig;
   final VideoConfig? videoConfig;
+  final LoadingIndicationConfig? loadingIndicationConfig;
 
   const SmartVideoPlayerWidget({
     required Key key,
     required this.height,
     required this.width,
     required this.debugLabelText,
-    required this.thumbnailUrl,
+    this.thumbnailUrl,
     required this.videoUrl,
     this.isAsset,
     this.playMode,
@@ -39,7 +40,8 @@ class SmartVideoPlayerWidget extends StatefulWidget {
     this.muteConfig,
     this.durationConfig,
     this.seekBarConfig,
-    this.videoConfig
+    this.videoConfig,
+    this.loadingIndicationConfig
   }) : super(key: key);
 
   @override
@@ -114,6 +116,7 @@ class _SmartVideoPlayerWidgetState extends State<SmartVideoPlayerWidget> {
                 height: widget.height,
                 thumbnailUrl: widget.thumbnailUrl,
                 onImageError: widget.onImageError,
+                loadingIndicationConfig: widget.loadingIndicationConfig,
               );
             } else {
               switch (event!.status) {
@@ -123,6 +126,7 @@ class _SmartVideoPlayerWidgetState extends State<SmartVideoPlayerWidget> {
                     height: widget.height,
                     thumbnailUrl: widget.thumbnailUrl,
                     onImageError: widget.onImageError,
+                    loadingIndicationConfig: widget.loadingIndicationConfig,
                   );
                   break;
                 case PlayerEventStatus.failed:
